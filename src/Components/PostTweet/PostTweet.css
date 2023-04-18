@@ -1,0 +1,45 @@
+.bottom-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    float: right;
+}
+
+.tweet-text {
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.error-message {
+    color: green;
+}
+
+.success-message {
+    color: red;
+}
+
+.message {
+    margin-right: 10px;
+}
+
+.post-tweet-button {
+    background: #1d9bf0;
+    border-radius: 5px;
+    border-style: none;
+    padding: 7px 24px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.post-tweet-button:hover:not(.post-tweet-button:disabled){
+    background: #157cc2;
+}
+
+.post-tweet-button:disabled {
+    opacity: 0.5;
+    cursor: unset;
+}
