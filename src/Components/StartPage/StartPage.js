@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import classes from './Start.module.css'
 
 export default function StartPage() {
@@ -7,24 +8,27 @@ export default function StartPage() {
 
   return (
     <>
-    <div className={classes.heading}>
-      <img src={imagePath} alt="example"style={{ width: '50px', height: 
-        '50px' }}/> 
-      <h1>NSNS Twitter</h1> 
-      {/* NSNS means Natalie Sabana nandini Shervani */}
+      <div className={classes.heading}>
+        <img src={imagePath} alt="example" style={{
+          width: '50px', height:
+            '50px'
+        }} />
+        <h1>NSNS Twitter</h1>
+        {/* NSNS means Natalie Sabana nandini Shervani */}
       </div>
       <div className={classes.user}>
-      <span>
-      <img src={imagePathUser} alt='user-example' style={{ width: '100px', 
-       height: '100px' }}/>
-      </span>
-      <button className={classes.btnregister} type='button'>Registred Here</button>
-      <button className={classes.btnlogin}type='button'>Login Here</button>
-
+        <span>
+          <img src={imagePathUser} alt='user-example' style={{
+            width: '100px',
+            height: '100px'
+          }} />
+        </span>
+        <Link to="/register" className={classes.btnregister}>Registred</Link>
+        <Link to="/login" className={classes.btnlogin}>Login</Link>
       </div>
 
 
-    
+
     </>
   )
 }
