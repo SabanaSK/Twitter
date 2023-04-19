@@ -12,12 +12,8 @@ const LoginPage = () => {
     <div>
       <h1>Login</h1>
       <form>
-        <label>Username</label>
-        <input type="text" />
-        <label>Email</label>
-        <input type="text" />
-        <label>Password</label>
-        <input type="password" />
+        <input type="text" placeholder='Username or Email' />
+        <input type="password" placeholder='Password' />
         <button type="submit">Login</button>
       </form>
     </div>
