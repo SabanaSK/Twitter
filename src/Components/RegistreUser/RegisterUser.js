@@ -4,6 +4,7 @@ import classes from './Register.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
+
 export default function RegisterUser() {
   return (
     <div className={classes.main}>
