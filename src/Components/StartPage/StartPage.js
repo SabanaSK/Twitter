@@ -13,8 +13,8 @@ export default function StartPage() {
           width: '50px', height:
             '50px'
         }} />
-        <h1>NSNS Twitter</h1>
-        {/* NSNS means Natalie Sabana nandini Shervani */}
+        <h1>Twitter</h1>
+        
       </div>
       <div className={classes.user}>
         <span>
