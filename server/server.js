@@ -1,26 +1,19 @@
 import express from 'express';
 
-import usersRoutes from './routes/users.js';
-
 
 
 const app = express();
-
 const PORT = 8080;
 
-const staticPath = url.fileURLToPath(new URL('../static', import.meta.url))
+const logger = (req, res, next) => {
+  console.log(`${req.method}  ${req.url}`, req.body)
+  next()
+}
 
-
-
-app.use(express.static(staticPath))
 app.use(express.json())
 app.use(logger)
-app.use('/api/users', usersRoutes)
+app.listen(PORT, () => {
 
-
-
-app.listen (PORT, () => {
-  
   console.log(`Server is running on port ${PORT}`);
 });
 
