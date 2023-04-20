@@ -7,20 +7,21 @@ body {
 
 
 
-.main {
-  max-width: 340px;
-  min-height: 460px;
-  padding: 10px 0;
-  margin: auto;
-  border-radius: 5px;
-  border: solid 1px #ccc;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
-  background: #ebebeb;
+.register {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  margin-top: 147px;
+  width: 90%;
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  margin-top: 147px;
 }
 
-.form {
+/* .form {
   margin: 0 30px;
-}
+} */
 
 body,
 div,
@@ -43,7 +44,57 @@ h1 {
   color: darkgreen;
 }
 
-label#icon {
+.control {
+  margin: 1rem 0;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.control label,
+.control input {
+  display: block;
+}
+
+.control label {
+  font-weight: bold;
+  flex: 1;
+  color: #464646;
+  margin-bottom: 0.5rem;
+}
+
+.control input {
+  flex: 3;
+  font: inherit;
+  padding: 0.35rem 0.35rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.control input:focus {
+  outline: none;
+  border-color: #4f005f;
+  background: #f6dbfc;
+}
+
+.control.invalid input {
+  border-color: red;
+  background: #fbdada;
+}
+
+.actions {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .control {
+    align-items: center;
+    flex-direction: row;
+  }
+
+}
+
+/* label#icon {
   margin: 0;
   border-radius: 5px 0 0 5px;
 }
@@ -102,4 +153,4 @@ button:hover {
 .adjust {
   display: inline-block;
   flex-direction: column;
-}
+} */

@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/login" exact element={<LoginPage />} />
-        <Route path="/register" exact element={<RegisterUser/>} />
+        <Route path="/register" exact element={<RegisterUser onRegisterUser={RegisterUser}/>} />
       </Routes>
     </>
   );
