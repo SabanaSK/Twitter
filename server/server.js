@@ -10,7 +10,8 @@ const logger = (req, res, next) => {
 
 app.use(express.json())
 app.use(logger)
-app.use('/api/users', router)
+app.use('/register', router);
+
 
 app.listen(PORT, () => {
 
