@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import db from'../database/database.js';
-=======
 import express from 'express';
 import db from '../database/database.js';
 
@@ -20,4 +17,3 @@ router.post('/register', async (req, res) => {
 });
 
 export default router;
->>>>>>> 45f2e69a886ecb605412f4f1ab96c03416875807
