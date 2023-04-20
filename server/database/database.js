@@ -8,9 +8,9 @@ const file = join(__dirname, 'db.json')
 const adapter = new JSONFile(file)
 const db = new Low(adapter)
 
-
+// Initialize the db with an empty object
+db.data = {}
 
 await db.read()
-
 
 export default db
