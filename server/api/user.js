@@ -1,5 +1,6 @@
 import express from 'express';
-import db from '../database/database.js';
+import db from '../database/db.json' assert { type: 'json' };
+
 
 const router = express.Router();
 
