@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classes from "./Register.module.css";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import {useRef} from 'react';
 
 
 export default function RegisterUser(props) {
@@ -13,6 +14,7 @@ export default function RegisterUser(props) {
   const [password, setPassword] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
+  const formRef = useRef();
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
@@ -62,6 +64,7 @@ export default function RegisterUser(props) {
       password: password,
       username: username
     };
+    formRef.current.reset();
 
     const response = await fetch("/register", {
       method: "POST",
@@ -69,11 +72,13 @@ export default function RegisterUser(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
+      
     });
 
     if (response.ok) {
       // Registration successful, redirect to login page
       navigate.push("/"); //homepages
+      
     } else {
       // Registration failed, display error message
       const data = await response.json();
@@ -81,10 +86,11 @@ export default function RegisterUser(props) {
     }
 
   };
+  
 
   return (
     <div className={classes.register}>
-      <form className={classes.form} onSubmit={submitHandler}>
+      <form className={classes.form} onSubmit={submitHandler} ref={formRef}>
         <h1>Registration</h1>
 
         <div
