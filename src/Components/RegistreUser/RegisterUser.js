@@ -57,14 +57,16 @@ export default function RegisterUser(props) {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-
+setEmail('');
+setUsername('');
+setPassword('');
 
     const user = {
       email: email,
       password: password,
       username: username
     };
-    formRef.current.reset();
+    
 
     const response = await fetch("/register", {
       method: "POST",
@@ -78,7 +80,7 @@ export default function RegisterUser(props) {
     if (response.ok) {
       // Registration successful, redirect to login page
       navigate.push("/"); //homepages
-      
+      formRef.current.reset();
     } else {
       // Registration failed, display error message
       const data = await response.json();
