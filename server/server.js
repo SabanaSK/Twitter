@@ -1,5 +1,6 @@
 import express from 'express';
 import router from './api/user.js';
+import cors from 'cors';
 
 const app = express();
 const PORT = 8080;
@@ -10,6 +11,7 @@ const logger = (req, res, next) => {
 
 app.use(express.json())
 app.use(logger)
+app.use(cors)
 app.use('/register', router);
 
 
