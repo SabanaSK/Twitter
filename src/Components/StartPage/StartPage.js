@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import classes from './Start.module.css'
 
-export default function StartPage() {
-  const imagePath = process.env.PUBLIC_URL + './img/greentwitt.png';
-  const imagePathUser = process.env.PUBLIC_URL + './img/greenuser.jpg';
+export default function StartPage ()
+{
+  const imagePath = process.env.PUBLIC_URL + './img/bluetwitt.png';
+  const imagePathUser = process.env.PUBLIC_URL + './img/twittuser.png';
 
   return (
     <>
@@ -14,7 +15,7 @@ export default function StartPage() {
             '50px'
         }} />
         <h1>Twitter</h1>
-        
+
       </div>
       <div className={classes.user}>
         <span>

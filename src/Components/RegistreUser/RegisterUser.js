@@ -2,32 +2,36 @@ import React, { useState } from "react";
 import classes from "./Register.module.css";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-import {useRef} from 'react';
+import { useRef } from 'react';
 
 
-export default function RegisterUser(props) {
+export default function RegisterUser (props)
+{
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState();
-  const [username, setUsername] = useState("");
-  const [userNameIsValid, setUsernameIsValid] = useState();
-  const [password, setPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState();
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [ email, setEmail ] = useState("");
+  const [ emailIsValid, setEmailIsValid ] = useState();
+  const [ username, setUsername ] = useState("");
+  const [ userNameIsValid, setUsernameIsValid ] = useState();
+  const [ password, setPassword ] = useState("");
+  const [ passwordIsValid, setPasswordIsValid ] = useState();
+  const [ formIsValid, setFormIsValid ] = useState(false);
   const formRef = useRef();
 
-  const emailChangeHandler = (event) => {
+  const emailChangeHandler = (event) =>
+  {
     setEmail(event.target.value);
     setFormIsValid(
       event.target.value.includes("@") && passwordIsValid
     );
   };
 
-  const userNameChangeHanlder = (event) => {
+  const userNameChangeHanlder = (event) =>
+  {
     const enteredValue = event.target.value;
     let isValid = true;
 
-    if (enteredValue.trim() === "" || enteredValue.includes(' ')) {
+    if (enteredValue.trim() === "" || enteredValue.includes(' '))
+    {
       isValid = false;
     }
 
@@ -36,37 +40,42 @@ export default function RegisterUser(props) {
     setFormIsValid(isValid && passwordIsValid && email.includes("@"));
   };
 
-  const passwordChangeHandler = (event) => {
+  const passwordChangeHandler = (event) =>
+  {
     const enteredValue = event.target.value.trim();
     setPassword(enteredValue);
     setPasswordIsValid(enteredValue.length > 6);
     setFormIsValid(email.includes("@") && enteredValue.length > 6);
   };
 
-  const validateEmailHandler = () => {
+  const validateEmailHandler = () =>
+  {
     setEmailIsValid(email.includes("@"));
   };
 
-  const validateUserNameHandler = () => {
+  const validateUserNameHandler = () =>
+  {
     setUsernameIsValid(username.trim() !== "");
   };
 
-  const validatePasswordHandler = () => {
+  const validatePasswordHandler = () =>
+  {
     setPasswordIsValid(password.trim().length > 6);
   };
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event) =>
+  {
     event.preventDefault();
-setEmail('');
-setUsername('');
-setPassword('');
+    setEmail('');
+    setUsername('');
+    setPassword('');
 
     const user = {
       email: email,
       password: password,
       username: username
     };
-    
+
 
     const response = await fetch("/register", {
       method: "POST",
@@ -74,29 +83,31 @@ setPassword('');
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
-      
+
     });
 
-    if (response.ok) {
+    if (response.ok)
+    {
       // Registration successful, redirect to login page
       navigate.push("/"); //homepages
       formRef.current.reset();
-    } else {
+    } else
+    {
       // Registration failed, display error message
       const data = await response.json();
       console.log(data.message);
     }
 
   };
-  
+
 
   return (
     <div className={classes.register}>
-      <form className={classes.form} onSubmit={submitHandler} ref={formRef}>
+      <form className={classes.form} onSubmit={submitHandler} ref={formRef} >
         <h1>Registration</h1>
 
         <div
-          className={`${classes.control} ${emailIsValid === false ? classes.invalid : ''
+          className={`${ classes.control } ${ emailIsValid === false ? classes.invalid : ''
             }`}
         ></div>
 
@@ -113,7 +124,7 @@ setPassword('');
 
         <label className='username' htmlFor='username'></label>
         <div
-          className={`${classes.control} ${userNameIsValid === false ? classes.invalid : ''
+          className={`${ classes.control } ${ userNameIsValid === false ? classes.invalid : ''
             }`}
         ></div>
         <input type="text"
@@ -126,7 +137,7 @@ setPassword('');
           placeholder="Name *" required />
 
         <div
-          className={`${classes.control} ${passwordIsValid === false ? classes.invalid : ''
+          className={`${ classes.control } ${ passwordIsValid === false ? classes.invalid : ''
             }`}
         ></div>
 

@@ -37,10 +37,10 @@
 
 .btnregister,
 .btnlogin {
-  background-color: green;
+  background-color: skyblue;
   border: none;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(27, 125, 3, 0.26);
+  box-shadow: skyblue;
   color: white;
   padding: 10px 20px;
   text-align: center;
@@ -55,5 +55,5 @@
 
 .btnregister:hover,
 .btnlogin:hover {
-  background-color: darkgreen;
+  background-color: rgb(24, 39, 242);
 }
