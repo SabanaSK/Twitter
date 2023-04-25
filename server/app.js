@@ -38,21 +38,23 @@ app.post("/register", async (request, response) => {
       password: hashPassword,
     });
     try {
-      const result = await user.save(); // User.insertOne
+      const result = await user.save();
+      response.status(201).send({
+        message: "User registered successfully",
+      });
     } catch (error) {
-      // User sent wrong data
       console.log("Something went wrong", error);
-      response.status(404).send({
+      response.status(400).send({
         message: "Could not register user",
       });
     }
   } catch (error) {
-    // Bcrypt not working
     response.status(500).send({
       message: "Server Error",
     });
   }
 });
+
 
 app.post("/login", async (request, response) => {
   const user = await User.findOne({ email: request.body.email });
