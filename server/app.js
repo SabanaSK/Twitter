@@ -34,6 +34,7 @@ app.post("/register", async (request, response) => {
   try {
     const hashPassword = await bcrypt.hash(request.body.password, 10);
     const user = new User({
+      username: request.body.username,
       email: request.body.email,
       password: hashPassword,
     });
@@ -57,7 +58,7 @@ app.post("/register", async (request, response) => {
 
 
 app.post("/login", async (request, response) => {
-  const user = await User.findOne({ email: request.body.email });
+  const user = await User.findOne({ $or: [{ email: request.body.email }, { username: request.body.username }] });
   if (user) {
     const match = await bcrypt.compare(request.body.password, user.password);
     if (!match) {
@@ -69,6 +70,7 @@ app.post("/login", async (request, response) => {
         {
           userId: user._id,
           userEmail: user.email,
+          username: user.username,
         },
         "RANDOM-TOKEN",
         { expiresIn: "24h" }
@@ -85,5 +87,6 @@ app.post("/login", async (request, response) => {
     });
   }
 });
+
 
 export default app;
