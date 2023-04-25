@@ -30,14 +30,14 @@ export default function PostTweet() {
     };
 
     return (
-        <div>
+        <div className='post-tweet'>
             <form className="tweet-form" onSubmit={handleSubmit} >
                 <textarea
                     placeholder="What's happening?"
                     value={postText}
                     onChange={handleInputChange}
                     className="tweet-text"
-                    rows={3}
+                    rows={1}
                 />
                 <div className="bottom-content">
                     {message && <div className={('message ' + message.type)}>{message.statusMessage}</div>}

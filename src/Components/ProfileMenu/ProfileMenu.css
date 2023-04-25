@@ -1,0 +1,26 @@
+.profile-menu {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    padding: 10px 15px;
+    align-items: center;
+}
+
+.profile-menu-avatar {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+
+.profile-menu-info {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 10px;
+    font-size: 12px;
+}
+
+.profile-menu-name {
+    font-weight: bolder;
+    color: white;
+}

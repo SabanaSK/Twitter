@@ -15,11 +15,13 @@
    
   }
 
-h2 {
+/* h2 {
   display: flex;
   justify-content: left;
   
-}
+} */
+
+/* use class names instead */
   
 .impProfile {
     margin-top: -150px;
