@@ -8,7 +8,7 @@ export default function LogOut ()
     <div className="div1">
       <div className='div2'>
         <div className='div3'>
-          <img src={imagePath} alt="example" style={{
+          <img className='logout-image' src={imagePath} alt="example" style={{
             width: '50px', height:
               '50px'
           }} />

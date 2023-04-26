@@ -44,6 +44,7 @@ app.post("/register", async (request, response) =>
   {
     const hashPassword = await bcrypt.hash(request.body.password, 10);
     const user = new User({
+      username: request.body.username,
       email: request.body.email,
       password: hashPassword,
     });
@@ -86,6 +87,7 @@ app.post("/login", async (request, response) =>
         {
           userId: user._id,
           userEmail: user.email,
+          username: user.username,
         },
         "RANDOM-TOKEN",
         { expiresIn: "24h" }
@@ -103,5 +105,6 @@ app.post("/login", async (request, response) =>
     });
   }
 });
+
 
 export default app;

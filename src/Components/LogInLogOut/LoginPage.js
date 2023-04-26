@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-
-import classes from './LogInLogout.module.css'
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import classes from './LogInLogout.module.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const imagePath = process.env.PUBLIC_URL + './img/bluetwitt.png';
   const [loginDetails, setLoginDetails] = useState({
     emailOrUsername: '',
-     password: ''
+    password: '',
   });
   const [formIsValid, setFormIsValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const inputChangeHandler = (event) => {
     const fieldName = event.target.name;
     const fieldValue = event.target.value.trim();
@@ -19,123 +20,80 @@ export default function LoginPage() {
     setLoginDetails((prevState) => {
       return {
         ...prevState,
-        [fieldName]: fieldValue
-      }
+        [fieldName]: fieldValue,
+      };
     });
+
     if (fieldName === 'emailOrUsername') {
-      setFormIsValid(fieldValue !== '');
+      setFormIsValid(fieldValue !== '' && loginDetails.password !== '');
     } else if (fieldName === 'password') {
       setFormIsValid(fieldValue !== '' && loginDetails.emailOrUsername !== '');
     }
-  }
-  const loginHandler = (event) => {
-  event.preventDefault();
+  };
 
-  
-  if (loginDetails.emailOrUsername === 'example@gmail.com' && loginDetails.password === 'password') {
-    console.log('Login successful');
-    
-  } else {
-    console.log('Login failed');
-    
-  }
-}
-const handleLoginClick=() =>{
-  if(formIsValid){
-    navigate.push('/login');
-  }
-};
-  
+  const loginHandler = async (event) => {
+    event.preventDefault();
 
-  
+    try {
+      const response = await axios.post("http://localhost:3001/login", {
+        emailOrUsername: loginDetails.emailOrUsername,
+        password: loginDetails.password,
+      });
+      if (response.status === 200) {
+        // Login successful, set token and redirect to home page
+        localStorage.setItem('token', response.data.token);
+        navigate('/');
+      }
+    } catch (error) {
+      if (error.response.status === 404) {
+        setErrorMessage('Invalid email/username or password');
+      } else {
+        setErrorMessage('Something went wrong, please try again later');
+      }
+    }
+  };
 
   return (
     <div className={classes.login}>
-    <img className={classes.img}src={imagePath} alt="example" style={{
-          width: '50px', height:
-            '50px'
-        }} />
-     <div className={classes.form}> 
-    
-      <h1>Login</h1>
-      <form onSubmit={loginHandler}>
-        <input 
-          type="text" 
-          name="emailOrUsername"
-          value={loginDetails.emailOrUsername}
-          onChange={inputChangeHandler}
-          placeholder='Email or Username' 
-        /><br/>
-        <input 
-          type="password"
-          name="password"
-          value={loginDetails.password}
-          onChange={inputChangeHandler} 
-          placeholder='Password' 
-        /><br/>
-        
-        
-        <Link
+      <img
+        className={classes.img}
+        src={imagePath}
+        alt="example"
+        style={{
+          width: '50px',
+          height: '50px',
+        }}
+      />
+      <div className={classes.form}>
+        <h1>Login</h1>
+        <form onSubmit={loginHandler}>
+          <input
+            type="text"
+            name="emailOrUsername"
+            value={loginDetails.emailOrUsername}
+            onChange={inputChangeHandler}
+            placeholder="Email or Username"
+          />
+          <br />
+          <input
+            type="password"
+            name="password"
+            value={loginDetails.password}
+            onChange={inputChangeHandler}
+            placeholder="Password"
+          />
+          <br />
+          {errorMessage && <p className={classes.error}>{errorMessage}</p>}
+          <Link
             to="/login"
             className={classes.button}
-            onClick={handleLoginClick}
+            onClick={loginHandler}
             disabled={!formIsValid}
           >
             Login
           </Link>
-      </form>
-    </div>
+        </form>
+      </div>
     </div>
   );
 }
-
-
-// import React, { useState } from 'react';
-
-// const LoginPage = () => {
-//   //skapa variabler för att spara inloggningsuppgifter
-//   const [username, setUsername] = useState('');
-//   const [email, setEmail] = useState('');
-//   // const [password, setPassword] = useState('');
-//   //skapa funktion för att logga in
-//   const usernameChangeHandler=(event)=>{
-//     setUsername(event.target.value);
-    
-//     if (username.trim() === "" || enteredValue.includes(' ')) {
-//       isValid = false;
-//     }
-//   }
-//   const emailChangeHandler = (event) => {
-//     setEmail(event.target.value);
-//     setFormIsValid(
-//       event.target.value.includes("@") ||
-//     );
-//   };
-//   // const passwordChangeHandler = (event) => {
-//   //   const enteredValue = event.target.value.trim();
-//   //   setPassword(enteredValue);
-//   //   setPasswordIsValid(enteredValue.length > 6);
-    
-//   // };
-
-//   return (
-//     <div>
-//       <h1>Login</h1>
-//       <form>
-//         <input type="text" 
-//         id='username'
-//         value={username}
-//         onChange={usernameChangeHandler}
-//         placeholder='Username or Email' />
-//         <input type="password"
-//         id='password'
-//         value={password}
-//         onChange={passwordChangeHandler} 
-//         placeholder='Password' />
-//         <button type="submit">Login</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginPage;

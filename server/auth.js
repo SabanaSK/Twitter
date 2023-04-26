@@ -18,7 +18,9 @@ const authMiddleware = async (request, response, next) => {
     next();
   } catch (error) {
     response.status(401).json({
-      error: new Error("Invalid request!"),
+      error: ("Invalid request!"),
     });
   }
 };
+
+export default authMiddleware;

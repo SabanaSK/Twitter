@@ -1,0 +1,42 @@
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.nav-menu .profile-menu {
+    margin-top: auto;
+}
+
+.nav-menu h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.nav-menu-link {
+    text-decoration: none;
+    color: white;
+    margin: auto;
+}
+
+.nav-menu-link {
+    text-decoration: none;
+    color: white;
+    margin: auto;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: fit-content;
+}
+
+nav li {
+    cursor: pointer;
+    padding: 7px 28px;
+}
+
+nav li:hover, .nav-menu .profile-menu:hover {
+    background-color: #191919;
+    border-radius: 30px;
+}
