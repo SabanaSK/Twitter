@@ -34,10 +34,6 @@ export default function LoginPage() {
 
   const loginHandler = async (event) => {
     event.preventDefault();
-    loginAttempt();
-  };
-
-  async function loginAttempt() {
     try {
       const response = await axios.post("http://localhost:3001/login", {
         email: loginDetails.emailOrUsername,
@@ -56,7 +52,9 @@ export default function LoginPage() {
         setErrorMessage('Something went wrong, please try again later');
       }
     }
-  }
+  };
+
+
 
   return (
     <div className={classes.login}>

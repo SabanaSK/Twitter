@@ -13,7 +13,7 @@
 /* .form {
   margin: 0 30px;
 } */
-
+/* 
 body,
 div,
 h1,
@@ -21,13 +21,13 @@ form,
 input {
   padding: 0;
   margin: 10px;
-  /* outline: none; */
+   outline: none; 
   font-family: Roboto, Arial, sans-serif;
   font-size: 16px;
   color: #666;
   width: 80%;
   margin-left: 20px;
-}
+} */
 
 h1 {
   padding: 10px 0;
@@ -73,6 +73,13 @@ input:focus {
 
 .actions {
   text-align: center;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  display: block;
 }
 
 @media (min-width: 768px) {
