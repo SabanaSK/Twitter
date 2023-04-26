@@ -1,11 +1,9 @@
-
-
 .register {
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
   margin-top: 147px;
-  width: 90%;
+  width: 40%;
   max-width: 40rem;
   margin: 2rem auto;
   padding: 2rem;
@@ -22,11 +20,13 @@ h1,
 form,
 input {
   padding: 0;
-  margin: 0;
-  outline: none;
+  margin: 10px;
+  /* outline: none; */
   font-family: Roboto, Arial, sans-serif;
   font-size: 16px;
   color: #666;
+  width: 80%;
+  margin-left: 20px;
 }
 
 h1 {
@@ -44,36 +44,42 @@ h1 {
   flex-direction: column;
 }
 
-.control label,
+/* .control label,
 .control input {
   display: block;
-}
+} */
 
-.control label {
+/* .control label {
   font-weight: bold;
   flex: 1;
   color: #464646;
   margin-bottom: 0.5rem;
-}
+} */
 
 .control input {
-  flex: 3;
+  flex: 0.5;
   font: inherit;
   padding: 0.35rem 0.35rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid light gray;
+  margin-left: 20px;
 }
 
-.control input:focus {
+input:hover {
+  border: blue;
+}
+
+
+input:focus {
   outline: none;
-  border-color: #4f005f;
+  border-color: skyblue;
   background: #f6dbfc;
 }
 
-.control.invalid input {
+/* .control.invalid input {
   border-color: red;
   background: #fbdada;
-}
+} */
 
 .actions {
   text-align: center;
@@ -84,5 +90,13 @@ h1 {
     align-items: center;
     flex-direction: row;
   }
+
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  margin-left: 40%;
+  margin-right: 10px;
 
 }

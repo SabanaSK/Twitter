@@ -9,8 +9,10 @@ import WelcomeCard from "./WelcomeCard";
 
 
 
+
 export default function RegisterUser (props)
 {
+  const imagePath = process.env.PUBLIC_URL + './img/bluetwitt.png';
   const navigate = useNavigate();
   const [ email, setEmail ] = useState("");
   const [ emailIsValid, setEmailIsValid ] = useState();
@@ -18,6 +20,8 @@ export default function RegisterUser (props)
   const [ userNameIsValid, setUsernameIsValid ] = useState();
   const [ password, setPassword ] = useState("");
   const [ passwordIsValid, setPasswordIsValid ] = useState();
+  const [ confirmpassword, setConfirmPassword ] = useState("");
+  const [ confirmpasswordIsValid, setConfirmPasswordIsValid ] = useState();
   const [ formIsValid, setFormIsValid ] = useState(false);
   const [ isRegistered, setIsRegistered ] = useState(false); // new state variable
 
@@ -36,6 +40,13 @@ export default function RegisterUser (props)
     setPasswordIsValid(enteredValue.length > 6);
     setFormIsValid(email.includes("@") && enteredValue.length > 6);
   };
+  const confirmpasswordChangeHandler = (event) =>
+  {
+    const enteredValue = event.target.value.trim();
+    setConfirmPassword(enteredValue);
+    setConfirmPasswordIsValid(enteredValue.length > 6);
+    setFormIsValid(email.includes("@") && enteredValue.length > 6);
+  };
 
   const validateEmailHandler = () =>
   {
@@ -50,6 +61,10 @@ export default function RegisterUser (props)
   const validatePasswordHandler = () =>
   {
     setPasswordIsValid(password.trim().length > 6);
+  };
+  const validateConfirmPasswordHandler = () =>
+  {
+    setConfirmPasswordIsValid(password.trim().length > 6);
   };
 
   function userNameChangeHandler (event)
@@ -74,11 +89,13 @@ export default function RegisterUser (props)
     setEmail("");
     setUsername("");
     setPassword("");
+    setConfirmPassword("");
 
     const user = {
       email: email,
-      password: password,
       username: username,
+      password: password,
+      confirmpassword: confirmpassword,
     };
 
     try
@@ -100,12 +117,18 @@ export default function RegisterUser (props)
 
   return (
     <>
+      <img className='img' src={imagePath} alt="example" style={{
+        width: '50px', height:
+          '50px'
+      }} />
       {isRegistered ? (
         <WelcomeCard />
       ) : (
+
         <Card className={Classes.register}>
+
           <form className={classes.form} onSubmit={submitHandler}>
-            <h1>Registration</h1>
+            <h1>Create An Account</h1>
 
             <div
               className={`${ classes.control } ${ emailIsValid === false ? classes.invalid : ""
@@ -149,6 +172,20 @@ export default function RegisterUser (props)
                 onChange={passwordChangeHandler}
                 onBlur={validatePasswordHandler}
                 placeholder="Password *"
+                required
+              />
+            </div>
+            <div
+              className={`${ classes.control } ${ confirmpasswordIsValid === false ? classes.invalid : ""
+                }`}
+            >
+              <input
+                type="password"
+                id="confirmpassword"
+                value={confirmpassword}
+                onChange={confirmpasswordChangeHandler}
+                onBlur={validateConfirmPasswordHandler}
+                placeholder="confirmPassword *"
                 required
               />
             </div>
