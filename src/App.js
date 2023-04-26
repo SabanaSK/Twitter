@@ -9,7 +9,8 @@ import LogOut from './Components/LogInLogOut/LogOut';
 import Home from './Components/Home/Home'
 
 
-function App() {
+function App ()
+{
 
   return (
     <>
