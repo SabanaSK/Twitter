@@ -1,0 +1,9 @@
+.tweets-list {
+    overflow-y: auto;
+    width: 100%;
+}
+
+.tweets-list h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}

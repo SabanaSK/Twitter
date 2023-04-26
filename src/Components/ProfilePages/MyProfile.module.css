@@ -1,0 +1,103 @@
+.userProfile {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(27, 125, 3, 0.26);
+    width: 200%;
+    height: 1000px;
+    margin-top: 1%;
+    margin-left: -50%;
+    margin-right: -80%;
+    padding: 2%;
+   
+  }
+
+/* h2 {
+  display: flex;
+  justify-content: left;
+  
+} */
+
+/* use class names instead */
+  
+.impProfile {
+    margin-top: -150px;
+    width: 180px;
+    height: 180px;
+  }
+
+.name {
+    font-weight: bold;
+    font-size: 40px;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    color: black;
+    margin-bottom: 15px;
+    margin-left: -480px;
+   
+  }
+ 
+.nick {
+        font-size: 20px;
+        margin-left: -95px;
+        margin-top: -8px;
+        margin-left: -80px;
+    }
+
+.about {
+    margin-left: -550px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.list {
+    list-style-type: none;
+    margin: 15px;
+}
+
+.containerTwo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+   
+    margin-left: -380px;
+
+}
+
+.friends {
+    list-style-type: none;
+    margin-left: -700px;
+}
+
+  
+.btnedit {
+    background-color: green;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(27, 125, 3, 0.26);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100px;
+    height: auto;
+    margin: 1%;
+    margin-left: 130px;
+    
+  }
+  
+.btnedit:hover {
+    background-color: darkgreen;
+  }
+
+ 

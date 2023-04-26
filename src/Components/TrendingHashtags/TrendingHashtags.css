@@ -1,0 +1,53 @@
+.trending-hashtags {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+.trending-hashtags h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.trending-container {
+    background: #16181C;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.trending-title {
+    font-size: 15px;
+    margin: 0;
+    padding: 10px 15px;
+    color: white;
+}
+
+.trending-item {
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+.trending-item:hover {
+    background-color: #1C1F22;
+}
+
+.trending-item-header {
+    font-weight: bold;
+    color: white;
+}
+
+.trending-item-stats {
+    font-size: 13px;
+    color: #888;
+}
+
+.trending-container .trending-item:last-of-type {
+    padding-bottom: 15px;
+}
+
+.show-more {
+    color: #1da1f2;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
