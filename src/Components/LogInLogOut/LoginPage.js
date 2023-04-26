@@ -46,7 +46,7 @@ export default function LoginPage() {
       if (response.status === 200) {
         // Login successful, set token and redirect to home page
         localStorage.setItem('token', response.data.token);
-        navigate('/');
+        navigate('/home');
       }
     } catch (error) {
       if (error.response.status === 404) {
