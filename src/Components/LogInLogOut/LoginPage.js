@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import classes from './LogInLogout.module.css';
+import classes from './LogIn.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const imagePath = process.env.PUBLIC_URL + './img/bluetwitt.png';
   const [loginDetails, setLoginDetails] = useState({
-    emailOrUsername: '',
+    email: '',
+    username: '',
     password: '',
   });
   const [formIsValid, setFormIsValid] = useState(false);
@@ -24,10 +25,12 @@ export default function LoginPage() {
       };
     });
 
-    if (fieldName === 'emailOrUsername') {
+    if (fieldName === 'email') {
+      setFormIsValid(fieldValue !== '' && loginDetails.password !== '');
+    } else if (fieldName === 'username') {
       setFormIsValid(fieldValue !== '' && loginDetails.password !== '');
     } else if (fieldName === 'password') {
-      setFormIsValid(fieldValue !== '' && loginDetails.emailOrUsername !== '');
+      setFormIsValid(fieldValue !== '' && (loginDetails.email !== '' || loginDetails.username !== ''));
     }
   };
 
@@ -36,13 +39,14 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post("http://localhost:3001/login", {
-        emailOrUsername: loginDetails.emailOrUsername,
+        email: loginDetails.email,
+        username: loginDetails.username,
         password: loginDetails.password,
       });
       if (response.status === 200) {
         // Login successful, set token and redirect to home page
         localStorage.setItem('token', response.data.token);
-        navigate('/');
+        navigate('/home');
       }
     } catch (error) {
       if (error.response.status === 404) {
@@ -69,10 +73,18 @@ export default function LoginPage() {
         <form onSubmit={loginHandler}>
           <input
             type="text"
-            name="emailOrUsername"
-            value={loginDetails.emailOrUsername}
+            name="email"
+            value={loginDetails.email}
             onChange={inputChangeHandler}
-            placeholder="Email or Username"
+            placeholder="Email"
+          />
+          <br />
+          <input
+            type="text"
+            name="username"
+            value={loginDetails.username}
+            onChange={inputChangeHandler}
+            placeholder="Username"
           />
           <br />
           <input

@@ -21,6 +21,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/edit" element={<EditPage />} />
         <Route path="/logout" element={<LogOut />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </>
   );
