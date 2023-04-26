@@ -1,8 +1,7 @@
 import React from 'react'
 import './LogOut.css';
 
-export default function LogOut ()
-{
+export default function LogOut() {
   const imagePath = process.env.PUBLIC_URL + './img/bluetwitt.png';
   return (
     <div className="div1">
