@@ -5,7 +5,8 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Card from "./card";
-import WelcomeCard from "./WelcomeCard";
+import RegisterSucessful from "./RegisterSucessful";
+
 
 
 
@@ -24,6 +25,23 @@ export default function RegisterUser (props)
   const [ confirmpasswordIsValid, setConfirmPasswordIsValid ] = useState();
   const [ formIsValid, setFormIsValid ] = useState(false);
   const [ isRegistered, setIsRegistered ] = useState(false); // new state variable
+  // Adding autogenerate nickname
+  // const [ nickname, setNickname ] = useState("");
+
+  // const generateNickname = () =>
+  // {
+  //   const nicknamePart1 = username.split(" ")[ 0 ];
+  //   const nicknamePart2 = email.split("@")[ 0 ];
+  //   setNickname(`${ nicknamePart1 }_${ nicknamePart2 }`);
+  // };
+
+  // useEffect(() =>
+  // {
+  //   //   generateNickname();
+  //   // }, []);
+
+  //   generateNickname();
+  // }, [ username, email ]);
 
   const emailChangeHandler = (event) =>
   {
@@ -76,7 +94,7 @@ export default function RegisterUser (props)
     {
       isValid = false;
     }
-
+    // const nickname = username + "_" + email.split("@")[ 0 ];
     setUsername(enteredValue);
     setUsernameIsValid(isValid);
     setFormIsValid(isValid && passwordIsValid && email.includes("@"));
@@ -96,6 +114,7 @@ export default function RegisterUser (props)
       username: username,
       password: password,
       confirmpassword: confirmpassword,
+      //   nickname: nickname,
     };
 
     try
@@ -122,7 +141,7 @@ export default function RegisterUser (props)
           '50px'
       }} />
       {isRegistered ? (
-        <WelcomeCard />
+        <RegisterSucessful />
       ) : (
 
         <Card className={Classes.register}>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import classes from './welcomecard.module.css';
+import classes from './RegisterSucessful.css';
 import Card from './card';
 
-const WelcomeCard = (props) =>
+const RegisterSucessful = (props) =>
 {
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const WelcomeCard = (props) =>
   );
 };
 
-export default WelcomeCard;
+export default RegisterSucessful;
 
 
 

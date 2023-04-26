@@ -44,17 +44,7 @@ h1 {
   flex-direction: column;
 }
 
-/* .control label,
-.control input {
-  display: block;
-} */
 
-/* .control label {
-  font-weight: bold;
-  flex: 1;
-  color: #464646;
-  margin-bottom: 0.5rem;
-} */
 
 .control input {
   flex: 0.5;
