@@ -1,5 +1,4 @@
 .div1 {
-
   position: absolute;
   top: 10%;
   left: 20%;
@@ -9,7 +8,6 @@
   padding: 20px;
   box-sizing: border-box;
 }
-
 .div2 {
   position: absolute;
   top: 10%;
@@ -31,6 +29,6 @@
   border-radius: 8px;
 }
 
-.logout-image {
+.logoutImage {
   margin-left: 90px;
 }

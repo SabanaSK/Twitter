@@ -22,6 +22,7 @@ const UserSchema = mongoose.Schema({
   }
 });
 
+<<<<<<< HEAD
 UserSchema.pre("save", function (next)
 {
   const nicknamePart1 = this.username.split(" ")[ 0 ];
@@ -65,3 +66,6 @@ export default mongoose.model("Users", UserSchema);
 
 // export default mongoose.model("Users") || mongoose.model("Users", UserSchema);
 
+=======
+export default mongoose.model.Users || mongoose.model("Users", UserSchema);
+>>>>>>> 7392e48848d2a345bd6aaaad957b2b78402be215
