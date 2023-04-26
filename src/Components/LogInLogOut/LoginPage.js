@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const imagePath = process.env.PUBLIC_URL + './img/greentwitt.png';
+  const imagePath = process.env.PUBLIC_URL + './img/bluetwitt.png';
   const [loginDetails, setLoginDetails] = useState({
     emailOrUsername: '',
      password: ''

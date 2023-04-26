@@ -14,6 +14,7 @@ export default function LogOut ()
           }} />
           <h3>Log out of Twitter?</h3>
           <button type='logout'>Log out</button><br />
+          {/* go to the start page */}
           <button type='cancel'>Cancel</button>
         </div>
       </div>

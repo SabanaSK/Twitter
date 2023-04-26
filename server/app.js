@@ -9,7 +9,8 @@ import dbConnect from "./db/database.js";
 const app = express();
 dbConnect();
 
-app.use((req, res, next) => {
+app.use((req, res, next) =>
+{
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -25,30 +26,42 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", (request, response, next) => {
+app.get("/", (request, response, next) =>
+{
   response.json({ message: "Hey! This is your server response!" });
   next();
 });
+app.get("/test", (request, response, next) =>
+{
+  response.json({ message: "Hey! testing!" });
+  console.log('testing');
+  next();
+});
 
-app.post("/register", async (request, response) => {
-  try {
+app.post("/register", async (request, response) =>
+{
+  try
+  {
     const hashPassword = await bcrypt.hash(request.body.password, 10);
     const user = new User({
       email: request.body.email,
       password: hashPassword,
     });
-    try {
+    try
+    {
       const result = await user.save();
       response.status(201).send({
         message: "User registered successfully",
       });
-    } catch (error) {
+    } catch (error)
+    {
       console.log("Something went wrong", error);
       response.status(400).send({
         message: "Could not register user",
       });
     }
-  } catch (error) {
+  } catch (error)
+  {
     response.status(500).send({
       message: "Server Error",
     });
@@ -56,15 +69,19 @@ app.post("/register", async (request, response) => {
 });
 
 
-app.post("/login", async (request, response) => {
+app.post("/login", async (request, response) =>
+{
   const user = await User.findOne({ email: request.body.email });
-  if (user) {
+  if (user)
+  {
     const match = await bcrypt.compare(request.body.password, user.password);
-    if (!match) {
+    if (!match)
+    {
       response.status(404).send({
         message: "Bad Request",
       });
-    } else {
+    } else
+    {
       const token = jwt.sign(
         {
           userId: user._id,
@@ -79,7 +96,8 @@ app.post("/login", async (request, response) => {
         token,
       });
     }
-  } else {
+  } else
+  {
     response.status(404).send({
       message: "Bad Request",
     });
