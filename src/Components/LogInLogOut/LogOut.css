@@ -34,36 +34,3 @@
 .logout-image {
   margin-left: 90px;
 }
-
-/* h3 {
-  margin-left: 10%;
-<<<<<<< HEAD
-  color: black;
-}
-=======
-} */
->>>>>>> d81e80f85e6b119babe73401aa810f07593fdcb8
-
-/* button {
-  font: inherit;
-  border: 1px solid #4f005f;
-  background: rgb(19, 21, 22);
-  color: white;
-  padding: 0.375rem 1.75rem;
-  width: max-content;
-  cursor: pointer;
-  font-size: 0.575rem;
-  margin-left: 30%;
-  border-radius: 30px;
-  margin-top: 10%;
-  margin-right: 60%;
-} */
-
-/* use class names instead. */
-/* 
-button:hover,
-button:active {
-  background: white;
-  border-color: #120216;
-  color: black;
-} */
