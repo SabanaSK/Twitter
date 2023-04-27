@@ -1,9 +1,11 @@
 import { React, useState } from 'react'
 import './ProfileMenu.css';
+import { useNavigate } from "react-router-dom";
 import LogoutPopup from '../LogoutPopup/LogoutPopup';
 
 export const ProfileMenu = () => {
     const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
 
     const openPopup = () => {
         setShowPopup(true);
@@ -11,6 +13,7 @@ export const ProfileMenu = () => {
 
     const closePopup = () => {
         setShowPopup(false);
+        navigate("/");
         console.log("close");
     };
 
