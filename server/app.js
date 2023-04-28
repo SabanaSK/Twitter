@@ -90,7 +90,8 @@ app.post("/profile/:id", async (req, res) =>
     console.error(err);
     res.status(500).send('Error updating profile');
   }
-});
+})
+
 
 app.post("/register", async (request, response) =>
 {
