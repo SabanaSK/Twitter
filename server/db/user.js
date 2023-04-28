@@ -19,6 +19,36 @@ const UserSchema = mongoose.Schema({
   nickname: {
     type: String,
     unique: [true, "Nickname Exist"],
+  },
+  img: {
+    type: String,
+    unique: false,
+  },
+  about: {
+    type: String,
+    unique: false,
+  },
+  employment: {
+    type: String,
+    unique: false,
+  },
+  city: {
+    type: String,
+    unique: false
+  },
+  web: {
+    type: String,
+    unique: false,
+  },
+  followers: {
+    type: Array, default: []
+  },
+  following: {
+    type: Array, default: []
+  },
+  registerDate: {
+    type: Date,
+    default: Date.now,
   }
 });
 
@@ -29,4 +59,5 @@ UserSchema.pre("save", function (next) {
   next();
 });
 
-export default mongoose.model("Users", UserSchema);
+export default mongoose.models.Users || mongoose.model("Users", UserSchema);
+

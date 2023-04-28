@@ -30,6 +30,38 @@ app.get("/", (request, response, next) => {
   next();
 });
 
+app.get("/profile/:id", async (request, response) => {
+  try {
+    const user = await User.findById(request.params.id);
+    response.status(200).send(user);
+  } catch (error) {
+    console.log(error);
+    response.status(500).send("Internal server error");
+  }
+});
+
+app.post("/profile/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedProfile = req.body;
+
+  try {
+    // TODO: Update the user profile in the database with the new data
+    // ...
+
+    // Return a success response
+    res.status(200).send('Profile updated successfully');
+  } catch (err) {
+    // Return an error response if something went wrong
+    console.error(err);
+    res.status(500).send('Error updating profile');
+  }
+})
+
+
+app.post("/register", async (request, response) =>
+{
+})
+
 app.post("/register", async (request, response) => {
   try {
     const hashPassword = await bcrypt.hash(request.body.password, 10);
