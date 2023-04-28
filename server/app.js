@@ -2,7 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import Post from "./db/post.js";
+import authMiddleware from "./auth.js";
 import User from "./db/user.js";
 import dbConnect from "./db/database.js";
 
@@ -30,6 +31,16 @@ app.get("/", (request, response, next) => {
   next();
 });
 
+app.get("/users", async (request, response) => {
+  try {
+    const users = await User.find({});
+    response.status(200).send(users);
+  } catch (error) {
+    console.log(error);
+    response.status(500).send("Internal server error");
+  }
+});
+
 app.get("/profile/:id", async (request, response) => {
   try {
     const user = await User.findById(request.params.id);
@@ -55,12 +66,7 @@ app.post("/profile/:id", async (req, res) => {
     console.error(err);
     res.status(500).send('Error updating profile');
   }
-})
-
-
-app.post("/register", async (request, response) =>
-{
-})
+});
 
 app.post("/register", async (request, response) => {
   try {
@@ -119,6 +125,20 @@ app.post("/login", async (request, response) => {
     });
   }
 });
+
+app.post("/tweet", authMiddleware, async (request, response) => {
+  try {
+    const { userId } = request.user;
+    const { text } = request.body;
+    const tweet = new Post({ author: userId, text });
+    const savedTweet = await tweet.save();
+    response.status(201).send(savedTweet);
+  } catch (error) {
+    console.log(error);
+    response.status(500).send("Internal server error");
+  }
+});
+
 
 
 export default app;
