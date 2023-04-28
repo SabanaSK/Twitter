@@ -51,13 +51,14 @@ app.get("/profile/:id", async (request, response) => {
   }
 });
 
-app.post("/profile/:id", async (req, res) => {
+
+app.put("/profile/:id", async (req, res) => {
   const { id } = req.params;
   const updatedProfile = req.body;
 
   try {
-    // TODO: Update the user profile in the database with the new data
-    // ...
+    // Find the user in the database by id and update their profile
+    const user = await User.findByIdAndUpdate(id, updatedProfile);
 
     // Return a success response
     res.status(200).send('Profile updated successfully');
@@ -66,7 +67,8 @@ app.post("/profile/:id", async (req, res) => {
     console.error(err);
     res.status(500).send('Error updating profile');
   }
-});
+})
+
 
 app.post("/register", async (request, response) => {
   try {
