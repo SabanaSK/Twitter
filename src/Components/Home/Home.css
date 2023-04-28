@@ -2,13 +2,13 @@
     display: flex;
     height: 100vh;
     color: #ffffff;
-    background: #0c0c0c;
+    background: #a5c6ef;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .home-left-section {
     max-width: 240px;
-    border-right: 1px solid #2f2f2f;
+    border-right: 2px solid #2587d7;
     padding: 0 40px;
 }
 
@@ -22,14 +22,14 @@
     max-width: 280px;
     padding: 10px 20px;
     width: 100%;
-    border-left: 1px solid #2f2f2f;
+    border-left: 2px solid #2587d7;
 }
 
 .search-box {
     padding: 8px 12px;
-    border: none;
+    border: #2587d7 solid;
     border-radius: 20px;
-    background-color: #202327;
+    background-color: #a5c6ef;
     color: #b0b0b0;
     font-size: 11px;
     outline: none;

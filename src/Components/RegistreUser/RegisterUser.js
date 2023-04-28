@@ -11,77 +11,70 @@ import RegisterSucessful from "./RegisterSucessful";
 
 
 
-export default function RegisterUser(props) {
+export default function RegisterUser (props)
+{
   const imagePath = process.env.PUBLIC_URL + './img/bluetwitt.png';
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState();
-  const [username, setUsername] = useState("");
-  const [userNameIsValid, setUsernameIsValid] = useState();
-  const [password, setPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState();
-  const [confirmpassword, setConfirmPassword] = useState("");
-  const [confirmpasswordIsValid, setConfirmPasswordIsValid] = useState();
-  const [formIsValid, setFormIsValid] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false); // new state variable
-  // Adding autogenerate nickname
-  // const [ nickname, setNickname ] = useState("");
+  const [ email, setEmail ] = useState("");
+  const [ emailIsValid, setEmailIsValid ] = useState();
+  const [ username, setUsername ] = useState("");
+  const [ userNameIsValid, setUsernameIsValid ] = useState();
+  const [ password, setPassword ] = useState("");
+  const [ passwordIsValid, setPasswordIsValid ] = useState();
+  const [ confirmpassword, setConfirmPassword ] = useState("");
+  const [ confirmpasswordIsValid, setConfirmPasswordIsValid ] = useState();
+  const [ formIsValid, setFormIsValid ] = useState(false);
+  const [ isRegistered, setIsRegistered ] = useState(false); // new state 
 
-  // const generateNickname = () =>
-  // {
-  //   const nicknamePart1 = username.split(" ")[ 0 ];
-  //   const nicknamePart2 = email.split("@")[ 0 ];
-  //   setNickname(`${ nicknamePart1 }_${ nicknamePart2 }`);
-  // };
-
-  // useEffect(() =>
-  // {
-  //   //   generateNickname();
-  //   // }, []);
-
-  //   generateNickname();
-  // }, [ username, email ]);
-
-  const emailChangeHandler = (event) => {
+  const emailChangeHandler = (event) =>
+  {
     setEmail(event.target.value);
     setFormIsValid(event.target.value.includes("@") && passwordIsValid);
   };
 
 
 
-  const passwordChangeHandler = (event) => {
+  const passwordChangeHandler = (event) =>
+  {
     const enteredValue = event.target.value.trim();
     setPassword(enteredValue);
     setPasswordIsValid(enteredValue.length > 6);
     setFormIsValid(email.includes("@") && enteredValue.length > 6);
   };
-  const confirmpasswordChangeHandler = (event) => {
+  const confirmpasswordChangeHandler = (event) =>
+  {
     const enteredValue = event.target.value.trim();
     setConfirmPassword(enteredValue);
     setConfirmPasswordIsValid(enteredValue.length > 6);
     setFormIsValid(email.includes("@") && enteredValue.length > 6);
   };
 
-  const validateEmailHandler = () => {
+  const validateEmailHandler = () =>
+  {
     setEmailIsValid(email.includes("@"));
   };
 
-  const validateUserNameHandler = () => {
+  const validateUserNameHandler = () =>
+  {
     setUsernameIsValid(username.trim() !== "");
   };
 
-  const validatePasswordHandler = () => {
+  const validatePasswordHandler = () =>
+  {
     setPasswordIsValid(password.trim().length > 6);
   };
-  const validateConfirmPasswordHandler = () => {
+  const validateConfirmPasswordHandler = () =>
+  {
     setConfirmPasswordIsValid(password.trim().length > 6);
   };
 
-  function userNameChangeHandler(event) {
+  function userNameChangeHandler (event)
+  {
     const enteredValue = event.target.value;
     let isValid = true;
 
-    if (enteredValue.trim() === "" || enteredValue.includes(" ")) {
+    if (enteredValue.trim() === "" || enteredValue.includes(" "))
+    {
       isValid = false;
     }
     // const nickname = username + "_" + email.split("@")[ 0 ];
@@ -91,7 +84,8 @@ export default function RegisterUser(props) {
   }
 
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event) =>
+  {
     event.preventDefault();
     setEmail("");
     setUsername("");
@@ -106,15 +100,18 @@ export default function RegisterUser(props) {
       //   nickname: nickname,
     };
 
-    try {
+    try
+    {
       const response = await axios.post("http://localhost:3001/register", user);
 
-      if (response.status === 201) {
+      if (response.status === 201)
+      {
         // Registration successful, redirect to login page
         setIsRegistered(true);
         navigate.push("/"); //homepages
       }
-    } catch (error) {
+    } catch (error)
+    {
       // Registration failed, display error message
       console.log(error.message);
     }
@@ -133,7 +130,7 @@ export default function RegisterUser(props) {
             <h1>Create An Account</h1>
 
             <div
-              className={`${classes.control} ${emailIsValid === false ? classes.invalid : ""
+              className={`${ classes.control } ${ emailIsValid === false ? classes.invalid : ""
                 }`}
             >
               <input
@@ -148,7 +145,7 @@ export default function RegisterUser(props) {
             </div>
 
             <div
-              className={`${classes.control} ${userNameIsValid === false ? classes.invalid : ""
+              className={`${ classes.control } ${ userNameIsValid === false ? classes.invalid : ""
                 }`}
             >
               <input
@@ -164,7 +161,7 @@ export default function RegisterUser(props) {
             </div>
 
             <div
-              className={`${classes.control} ${passwordIsValid === false ? classes.invalid : ""
+              className={`${ classes.control } ${ passwordIsValid === false ? classes.invalid : ""
                 }`}
             >
               <input
@@ -178,7 +175,7 @@ export default function RegisterUser(props) {
               />
             </div>
             <div
-              className={`${classes.control} ${confirmpasswordIsValid === false ? classes.invalid : ""
+              className={`${ classes.control } ${ confirmpasswordIsValid === false ? classes.invalid : ""
                 }`}
             >
               <input
@@ -191,6 +188,7 @@ export default function RegisterUser(props) {
                 required
               />
             </div>
+
 
             <div className={classes.actions}>
               <Button
