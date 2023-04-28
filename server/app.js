@@ -64,7 +64,11 @@ app.get("/profile/:id", async (request, response) =>
   try
   {
     const user = await User.findById(request.params.id);
-    response.status(200).send(user);
+    if (!user) {
+      response.status(404).send("The user was not found.");
+    } else {
+      response.status(200).send(user);
+    }
   } catch (error)
   {
     console.log(error);
