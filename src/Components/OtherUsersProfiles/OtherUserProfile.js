@@ -57,19 +57,19 @@ const OtherUserProfilePage = ({ match }) =>
                   <div className={classes.profileInfo}>
                     <div className={classes.infoItem}>
                       <FaUser className={classes.infoIcon} />
-                      <span className={classes.infoText}>{user.username}</span>
+                      <span className={classes.infoText}>{userData.username}</span>
                     </div>
                     <div className={classes.infoItem}>
                       <FaUser className={classes.infoIcon} />
-                      <span className={classes.infoText}>{user.nickname}</span>
+                      <span className={classes.infoText}>{userData.nickname}</span>
                     </div>
                     <div className={classes.infoItem}>
                       <FaMapMarkerAlt className={classes.infoIcon} />
-                      <span className={classes.infoText}>{user.city}</span>
+                      <span className={classes.infoText}>{userData.city}</span>
                     </div>
                     <div className={classes.infoItem}>
                       <FaUsers className={classes.infoIcon} />
-                      <span className={classes.infoText}>{user.followers} followers</span>
+                      <span className={classes.infoText}>{userData.followers} followers</span>
                     </div>
                   </div>
                 </div>
