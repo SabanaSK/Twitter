@@ -4,6 +4,7 @@ import './LogoutPopup.css';
 const LogoutPopup = ({ showPopup, onClose }) => {
     const handleLogout = () => {
         // Perform logout actions here
+        localStorage.removeItem('token');
         console.log('Logged out');
         onClose();
     };

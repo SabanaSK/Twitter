@@ -12,15 +12,16 @@ export default function PostTweet() {
         setPostText(text);
         setMessage(null);
         setIsButtonDisabled(text.length > 145 || text.length <= 0);
-
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
         try {
-            await axios.post('http://localhost:3000/tweet/', { text: postText });
+            const token = localStorage.getItem('token');
+            await axios.post('http://localhost:3001/tweet/', { text: postText }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
             setPostText('');
             setMessage({ statusMessage: 'Your tweet has been posted!', type: 'success-message', });
         } catch (err) {
@@ -28,6 +29,7 @@ export default function PostTweet() {
             console.log(err)
         }
     };
+
 
     return (
         <div className='post-tweet'>
