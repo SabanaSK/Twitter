@@ -2,7 +2,7 @@ import axios from 'axios';
 import { React, useState } from 'react';
 import './PostTweet.css';
 
-export default function PostTweet() {
+export default function PostTweet(props) {
     const [postText, setPostText] = useState('');
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [message, setMessage] = useState(null);
@@ -22,6 +22,7 @@ export default function PostTweet() {
             await axios.post('http://localhost:3001/tweet/', { text: postText }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            props.onSubmittedTweetChange(postText);
             setPostText('');
             setMessage({ statusMessage: 'Your tweet has been posted!', type: 'success-message', });
         } catch (err) {
