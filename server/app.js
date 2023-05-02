@@ -12,8 +12,7 @@ import dbConnect from "./db/database.js";
 const app = express();
 dbConnect();
 
-app.use((req, res, next) =>
-{
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -29,58 +28,45 @@ app.use((req, res, next) =>
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", (request, response, next) =>
-{
+app.get("/", (request, response, next) => {
   response.json({ message: "Hey! This is your server response!" });
   next();
 });
 
-app.get("/users/:id", async (request, response) =>
-{
-  try
-  {
+app.get("/users/:id", async (request, response) => {
+  try {
     const users = await User.find({});
     response.status(200).send(users);
-  } catch (error)
-  {
+  } catch (error) {
     console.log(error);
     response.status(500).send("Internal server error");
   }
 });
-app.get("/homeuser", async (request, response) =>
-{
-  try
-  {
-    const users = await User.aggregate([ { $sample: { size: 4 } } ]);
+app.get("/homeuser", async (request, response) => {
+  try {
+    const users = await User.aggregate([{ $sample: { size: 4 } }]);
     response.status(200).send(users);
-  } catch (error)
-  {
+  } catch (error) {
     console.log(error);
     response.status(500).send("Internal server error");
   }
 });
 
 
-app.get("/profile/:id", async (request, response) =>
-{
-  try
-  {
+app.get("/profile/:id", async (request, response) => {
+  try {
     const user = await User.findById(request.params.id);
-    if (!user)
-    {
+    if (!user) {
       response.status(404).send("The user was not found.");
-    } else
-    {
+    } else {
       response.status(200).send(user);
     }
-  } catch (error)
-  {
+  } catch (error) {
     console.log(error);
     response.status(500).send("Internal server error");
   }
 });
 
-<<<<<<< HEAD
 app.put("/profile/:id", async (req, res) => {
   const { id } = req.params;
   const updatedProfile = req.body;
@@ -89,59 +75,31 @@ app.put("/profile/:id", async (req, res) => {
     const updatedProfileData = await User.findByIdAndUpdate(id, updatedProfile, { new: true });
     res.json(updatedProfileData);
   } catch (err) {
-=======
-app.post("/profile/:id", async (req, res) =>
-{
-  const { id } = req.params;
-  const updatedProfile = req.body;
-
-  try
-  {
-    // TODO: Update the user profile in the database with the new data
-    // ...
-
-    // Return a success response
-    res.status(200).send('Profile updated successfully');
-  } catch (err)
-  {
-    // Return an error response if something went wrong
->>>>>>> 80089a5bbe828c21bb6d7b59b95e7effa064d0b7
     console.error(err);
     res.status(500).json({ error: 'Failed to update profile' });
   }
 });
 
-
- 
-
-
-
-
-app.post("/register", async (request, response) =>
-{
-  try
-  {
+app.post("/register", async (request, response) => {
+  try {
     const hashPassword = await bcrypt.hash(request.body.password, 10);
     const user = new User({
       username: request.body.username,
       email: request.body.email,
       password: hashPassword,
     });
-    try
-    {
+    try {
       const result = await user.save();
       response.status(201).send({
         message: "User registered successfully",
       });
-    } catch (error)
-    {
+    } catch (error) {
       console.log("Something went wrong", error);
       response.status(400).send({
         message: "Could not register user",
       });
     }
-  } catch (error)
-  {
+  } catch (error) {
     response.status(500).send({
       message: "Server Error",
     });
@@ -149,19 +107,15 @@ app.post("/register", async (request, response) =>
 });
 
 
-app.post("/login", async (request, response) =>
-{
-  const user = await User.findOne({ $or: [ { email: request.body.email }, { username: request.body.username } ] });
-  if (user)
-  {
+app.post("/login", async (request, response) => {
+  const user = await User.findOne({ $or: [{ email: request.body.email }, { username: request.body.username }] });
+  if (user) {
     const match = await bcrypt.compare(request.body.password, user.password);
-    if (!match)
-    {
+    if (!match) {
       response.status(404).send({
         message: "Bad Request",
       });
-    } else
-    {
+    } else {
       const token = jwt.sign(
         {
           userId: user._id,
@@ -177,38 +131,55 @@ app.post("/login", async (request, response) =>
         token,
       });
     }
-  } else
-  {
+  } else {
     response.status(404).send({
       message: "Bad Request",
     });
   }
 });
 
-app.get("/tweets", async (req, res) =>
-{
-  try
-  {
-    const tweets = await Post.find({});
-    res.status(200).send(tweets);
-  } catch (error)
-  {
-    console.log(error);
-    res.status(500).send("Internal server error");
+
+app.get('/tweets', async (req, res) => {
+  try {
+    const tweets = await Post.find().lean().exec();
+    if (!tweets) {
+      /* console.error('Error: No tweets found'); */
+      res.status(500).send('Error fetching tweets');
+      return;
+    }
+
+    const tweetPromises = tweets.map(async (tweet) => {
+      const user = await User.findById(tweet.author);
+      if (!user) {
+        /* console.error(`Error: User not found for tweet with author: ${tweet.author}`); */
+        return null;
+      }
+
+      return {
+        ...tweet,
+        username: user.username,
+        nickname: user.nickname,
+      };
+    });
+
+    const tweetsWithUserInfo = await Promise.all(tweetPromises);
+    const filteredTweetsWithUserInfo = tweetsWithUserInfo.filter(tweet => tweet !== null);
+    res.send(filteredTweetsWithUserInfo);
+  } catch (error) {
+    /*  console.error('Error:', error); */
+    res.status(500).send('Error fetching tweets');
   }
 });
 
-app.post("/tweet", authMiddleware, async (request, response) =>
-{
-  try
-  {
+
+app.post("/tweet", authMiddleware, async (request, response) => {
+  try {
     const { userId } = request.user;
     const { text } = request.body;
     const tweet = new Post({ author: userId, text });
     const savedTweet = await tweet.save();
     response.status(201).send(savedTweet);
-  } catch (error)
-  {
+  } catch (error) {
     console.log(error);
     response.status(500).send("Internal server error");
   }

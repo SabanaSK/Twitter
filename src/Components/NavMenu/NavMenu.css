@@ -1,7 +1,7 @@
 .nav-menu {
     display: flex;
     flex-direction: column;
-    color: white;
+    color: #000000;
 }
 
 .nav-menu .profile-menu {
@@ -15,13 +15,13 @@
 
 .nav-menu-link {
     text-decoration: none;
-    color: white;
+    color: #000000;
     margin: auto;
 }
 
 .nav-menu-link {
     text-decoration: none;
-    color: white;
+    color: #000000;
     margin: auto;
 }
 

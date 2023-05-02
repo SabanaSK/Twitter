@@ -23,7 +23,9 @@ export default function GetTweets() {
             <h1>Tweets</h1>
             <ul>
                 {tweets.map((tweet, index) => (
-                    <li key={index}>{tweet.text}</li>
+                    <li key={index}>
+                        <strong>{tweet.username} ({tweet.nickname}):</strong> {tweet.text}
+                    </li>
                 ))}
             </ul>
         </div>

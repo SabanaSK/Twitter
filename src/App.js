@@ -3,20 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 import StartPage from './Components/StartPage/StartPage';
 import LoginPage from './Components/LogInLogOut/LoginPage';
 import RegisterUser from './Components/RegistreUser/RegisterUser';
-<<<<<<< HEAD
 import ProfilePage from './Components/ProfilePages/MyProfilePage';
 import EditPage from './Components/Profile/EditPage'
-=======
-// import ProfilePage from './Components/ProfilePages/MyProfilePage';
-import EditPage from './Components/ProfilePages/EditPage'
->>>>>>> 80089a5bbe828c21bb6d7b59b95e7effa064d0b7
 import LogOut from './Components/LogInLogOut/LogOut';
 import Home from './Components/Home/Home'
 import OtherUserProfilePage from './Components/OtherUsersProfiles/OtherUserProfile';
 
 
-function App ()
-{
+function App() {
 
   return (
     <>
