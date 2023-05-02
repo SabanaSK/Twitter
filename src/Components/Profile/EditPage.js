@@ -1,26 +1,30 @@
-import classes from './Edit.module.css'
-import { Link, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 
 
-const EditProfile = ({ userProfile }) => {
+
+
+const EditProfile = ({ profileData }) => {
   const [formData, setFormData] = useState({
-    username: userProfile ? userProfile.username : '',
-    nickname: userProfile ? userProfile.nickname : '',
-    about: userProfile ? userProfile.about : '',
-    employment: userProfile ? userProfile.employment : '',
-    city: userProfile ? userProfile.city : '',
-    web: userProfile ? userProfile.web : ''
+    _id: profileData ? profileData._id : '',
+    username: profileData ? profileData.username : '',
+    nickname: profileData ? profileData.nickname : '',
+    about: profileData ? profileData.about : '',
+    employment: profileData ? profileData.employment : '',
+    city: profileData ? profileData.city : '',
+    web: profileData ? profileData.web : ''
   });
+
+  console.log()
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSaveChanges = async () => {
+    console.log('Button clicked')
     try {
-      const response = await axios.post(`http://localhost:3001/profile/${userProfile.id}`, formData);
+      const response = await axios.put(`http://localhost:3001/profile/${formData._id}`, formData);
       console.log(response.data);
     } catch (err) {
       console.log("error", err);
@@ -30,10 +34,10 @@ const EditProfile = ({ userProfile }) => {
   const handleSubmit = e => {
     e.preventDefault();
     handleSaveChanges();
-    // TODO: Add code to submit form data to server
+    window.location.reload()
   };
 
-  if (!userProfile) {
+  if (!profileData) {
     return <div>Loading...</div>;
   }
 
