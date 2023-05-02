@@ -4,7 +4,7 @@ import StartPage from './Components/StartPage/StartPage';
 import LoginPage from './Components/LogInLogOut/LoginPage';
 import RegisterUser from './Components/RegistreUser/RegisterUser';
 import ProfilePage from './Components/ProfilePages/MyProfilePage';
-import EditPage from './Components/ProfilePages/EditPage'
+import EditPage from './Components/Profile/EditPage'
 import LogOut from './Components/LogInLogOut/LogOut';
 import Home from './Components/Home/Home'
 

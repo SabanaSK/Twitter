@@ -1,9 +1,11 @@
-import classes from './MyProfile.module.css';
+/*import classes from './MyProfile.module.css';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import EditProfile from './EditPage.js';
+import EditProfile from '../Profile/EditPage.js';
+
+const imagePathUser = process.env.PUBLIC_URL + '../img/greenuser.jpg';
 
 
 const ProfilePage = () => {
@@ -31,16 +33,18 @@ const ProfilePage = () => {
 
     const handleEditButtonClick = () => {
         setShowEdit(true);
+
     }
 
     const handleCancelClick = () => {
         setShowEdit(false);
     }
-  
+
+    
   
     return (
       <div className={classes.userProfile}>
-        <img className={classes.impProfile} src={userProfile && userProfile.img} alt='user-example' />
+        <img className={classes.impProfile} src={imagePathUser} alt='user-example' />
         <h2 className={classes.name}>{userProfile && userProfile.username}</h2>
         <div className={classes.container}>
           <h5 className={classes.nick}>{userProfile && userProfile.nickname}</h5>
@@ -73,4 +77,4 @@ const ProfilePage = () => {
     
   }
   
-  export default ProfilePage;
+  export default ProfilePage;*/

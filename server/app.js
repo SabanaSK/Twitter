@@ -7,6 +7,8 @@ import authMiddleware from "./auth.js";
 import User from "./db/user.js";
 import dbConnect from "./db/database.js";
 
+
+
 const app = express();
 dbConnect();
 
@@ -65,22 +67,23 @@ app.get("/profile/:id", async (request, response) => {
   }
 });
 
-app.post("/profile/:id", async (req, res) => {
+app.put("/profile/:id", async (req, res) => {
   const { id } = req.params;
   const updatedProfile = req.body;
 
   try {
-    // TODO: Update the user profile in the database with the new data
-    // ...
-
-    // Return a success response
-    res.status(200).send('Profile updated successfully');
+    const updatedProfileData = await User.findByIdAndUpdate(id, updatedProfile, { new: true });
+    res.json(updatedProfileData);
   } catch (err) {
-    // Return an error response if something went wrong
     console.error(err);
-    res.status(500).send('Error updating profile');
+    res.status(500).json({ error: 'Failed to update profile' });
   }
-})
+});
+
+
+ 
+
+
 
 
 app.post("/register", async (request, response) => {
