@@ -7,15 +7,20 @@ import axios from 'axios';
 import { Route, Routes } from "react-router-dom";
 import Profile from '../Profile/Profile';
 
-const Home = () => {
-  const [users, setUsers] = useState(null);
+const Home = () =>
+{
+  const [ users, setUsers ] = useState(null);// here is null first
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
+  useEffect(() =>
+  {
+    const fetchUsers = async () =>
+    {
+      try
+      {
         const response = await axios.get("http://localhost:3001/homeuser?count=4");
         setUsers(response.data);
-      } catch (error) {
+      } catch (error)
+      {
         console.log(error.message);
       }
     };
@@ -32,7 +37,7 @@ const Home = () => {
           <Route path="/" element={<TweetsList />} />
           <Route path="profile/:userId" element={<Profile />} />
         </Routes>
-        {/* <div>
+        <div>
           {users ? (
             <div>
               {users.map(user => (
@@ -47,7 +52,7 @@ const Home = () => {
           ) : (
             <p>Loading...</p>
           )}
-        </div> */}
+        </div>
       </div>
       <div className="home-right-section">
         <input

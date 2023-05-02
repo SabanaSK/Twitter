@@ -166,6 +166,28 @@ app.post("/login", async (request, response) =>
     });
   }
 });
+// make a post request for follow user
+
+app.post('/users/:id/followers', async (req, res) =>
+{
+  try
+  {
+    const userId = req.params.id;
+    const followerId = req.body.followerId;
+    console.log(followerId);
+
+    // Add the follower ID to the followers array of the user
+    const user = await User.findById(userId);
+    user.followers.push(followerId);
+    await user.save();
+
+    res.sendStatus(200);
+  } catch (error)
+  {
+    console.log(error.message);
+    res.sendStatus(500);
+  }
+});
 
 app.get("/tweets", async (req, res) =>
 {
