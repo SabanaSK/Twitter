@@ -5,7 +5,7 @@ import axios from "axios";
 import { FaUser, FaMapMarkerAlt, FaUsers } from "react-icons/fa";
 
 import classes from './OtherUsersProfile.module.css';
-
+import { Link } from "react-router-dom";
 const OtherUserProfilePage = ({ match }) =>
 {
   const [ userData, setUserData ] = useState({});
@@ -28,7 +28,7 @@ const OtherUserProfilePage = ({ match }) =>
       }
     };
     fetchUserData();
-  }, [ match.params.id ]);
+  }, []);
 
   return (
     <>
@@ -42,8 +42,8 @@ const OtherUserProfilePage = ({ match }) =>
 
           <div className={classes.sidebar}>
             <ul>
-              <li>Home</li>
-              <li>Profile</li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/profile">Profile</Link></li>
             </ul>
           </div>
 
