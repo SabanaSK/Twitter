@@ -10,7 +10,7 @@ const Profile = () => {
   const { id } = useParams();
 
   const [profileData, setProfileData] = useState(null);
-  
+
   const [showEdit, setShowEdit] = useState(false);
 
   const jwt = localStorage.getItem("token");
@@ -68,20 +68,20 @@ const Profile = () => {
           <li>{profileData.web}</li>
           <li>{profileData.registerDate}</li>
         </ul>
-      
+
         <div>
-        <li><Link to={`/following${id}`}>Following</Link>: {profileData.followingCount}</li>
-         <li><Link to={`/followers${id}`}>Followers</Link>: {profileData.followersCount}</li>
-         {showEdit && (
+          <li><Link to={`/following${id}`}>Following</Link>: {profileData.followingCount}</li>
+          <li><Link to={`/followers${id}`}>Followers</Link>: {profileData.followersCount}</li>
+          {showEdit && (
             <div>
-               <EditProfile profileData={profileData} />
-                <button onClick={handleCancelClick}>Cancel</button>
+              <EditProfile profileData={profileData} />
+              <button onClick={handleCancelClick}>Cancel</button>
             </div>
           )}
         </div>
-        
+
       </div>
-      
+
     </div>
   );
 };

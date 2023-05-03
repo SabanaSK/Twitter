@@ -1,0 +1,19 @@
+.submitted-tweet {
+  display: none;
+  align-items: flex-start;
+  padding: 12px;
+  border-bottom: 1px solid #e1e8ed;
+  background-color: #fff;
+}
+
+.submitted-tweet strong {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.submitted-tweet > span {
+  font-size: 14px;
+  color: #657786;
+  margin-right: 6px;
+}

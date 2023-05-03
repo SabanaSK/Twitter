@@ -33,21 +33,22 @@ app.get("/", (request, response, next) => {
   next();
 });
 
-app.get("/users/:id", async (request, response) => {
+app.get("/users/:id/:userId", async (request, response) => {
   try {
     const users = await User.find({});
     response.status(200).send(users);
   } catch (error) {
-    console.log(error);
+    /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });
+
 app.get("/homeuser", async (request, response) => {
   try {
     const users = await User.aggregate([{ $sample: { size: 4 } }]);
     response.status(200).send(users);
   } catch (error) {
-    console.log(error);
+    /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });
@@ -62,7 +63,7 @@ app.get("/profile/:id", async (request, response) => {
       response.status(200).send(user);
     }
   } catch (error) {
-    console.log(error);
+    /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });
@@ -75,7 +76,7 @@ app.put("/profile/:id", async (req, res) => {
     const updatedProfileData = await User.findByIdAndUpdate(id, updatedProfile, { new: true });
     res.json(updatedProfileData);
   } catch (err) {
-    console.error(err);
+    /*     console.log(error); */
     res.status(500).json({ error: 'Failed to update profile' });
   }
 });
@@ -94,7 +95,7 @@ app.post("/register", async (request, response) => {
         message: "User registered successfully",
       });
     } catch (error) {
-      console.log("Something went wrong", error);
+      /* console.log("Something went wrong", error); */
       response.status(400).send({
         message: "Could not register user",
       });
@@ -139,13 +140,11 @@ app.post("/login", async (request, response) => {
 });
 // make a post request for follow user
 
-app.post('/users/:id/followers', async (req, res) =>
-{
-  try
-  {
+app.post('/users/:id/followers', async (req, res) => {
+  try {
     const userId = req.params.id;
     const followerId = req.body.followerId;
-    console.log(followerId);
+    /* console.log(followerId); */
 
     // Add the follower ID to the followers array of the user
     const user = await User.findById(userId);
@@ -153,9 +152,8 @@ app.post('/users/:id/followers', async (req, res) =>
     await user.save();
 
     res.sendStatus(200);
-  } catch (error)
-  {
-    console.log(error.message);
+  } catch (error) {
+    /* console.log(error.message); */
     res.sendStatus(500);
   }
 });
@@ -202,7 +200,7 @@ app.post("/tweet", authMiddleware, async (request, response) => {
     const savedTweet = await tweet.save();
     response.status(201).send(savedTweet);
   } catch (error) {
-    console.log(error);
+    /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });

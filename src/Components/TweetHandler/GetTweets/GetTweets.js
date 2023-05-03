@@ -20,10 +20,9 @@ export default function GetTweets() {
 
     return (
         <div>
-            <h1>Tweets</h1>
             <ul>
                 {tweets.map((tweet, index) => (
-                    <li key={index}>
+                    <li key={index} className="get-tweet">
                         <strong>{tweet.username} ({tweet.nickname}):</strong> {tweet.text}
                     </li>
                 ))}
