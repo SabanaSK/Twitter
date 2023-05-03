@@ -74,3 +74,24 @@
 li {
     color: black;
 }
+
+.get-tweets {
+    display: table;
+    align-items: flex-start;
+    padding: 12px;
+    border-bottom: 1px solid #e1e8ed;
+    background-color: #fff;
+  }
+  
+  .get-tweets strong {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 6px;
+  }
+  
+  .get-tweets > span {
+    font-size: 14px;
+    color: #657786;
+    margin-right: 6px;
+  }
+  

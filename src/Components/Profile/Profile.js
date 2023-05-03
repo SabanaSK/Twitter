@@ -6,11 +6,12 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import EditProfile from './EditPage';
 
+
 const Profile = () => {
   const { id } = useParams();
 
   const [profileData, setProfileData] = useState(null);
-
+  const [tweets, setTweets] = useState([]);
   const [showEdit, setShowEdit] = useState(false);
 
   const jwt = localStorage.getItem("token");
@@ -28,6 +29,20 @@ const Profile = () => {
     };
     fetchProfile();
   }, [id]);
+
+  useEffect(() => {
+    const fetchProfileTweets = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/tweets/${id}`);
+        setTweets(response.data);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProfileTweets();
+  }, [id]);
+
 
   if (!profileData) {
     return <p>Loading...</p>;
@@ -81,6 +96,17 @@ const Profile = () => {
         </div>
 
       </div>
+      <div>
+        {tweets.map(tweet => (
+          <div key={tweet._id} className="get-tweets">
+            <h3>{tweet.username}</h3>
+            <p>{tweet.nickname}</p>
+            <p>{tweet.text}</p>
+            <p>{tweet.createdAt}</p>
+          </div>
+        ))}
+      </div>
+
 
     </div>
   );
