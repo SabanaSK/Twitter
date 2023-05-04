@@ -33,6 +33,19 @@ app.get("/", (request, response, next) => {
   next();
 });
 
+app.get('/search', async (req, res) => {
+  const searchQuery = req.query.search;
+
+  try {
+    const users = await User.find({ username: { $regex: searchQuery, $options: 'i' } });
+    console.log("hello")
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while fetching users');
+  }
+});
+
 app.get("/users/:id/:userId", async (request, response) => {
   try {
     const users = await User.find({});
