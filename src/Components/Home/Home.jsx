@@ -5,6 +5,7 @@ import TrendingHashtags from '../TrendingHashtags/TrendingHashtags';
 import './Home.css';
 import { Link, Route, Routes } from 'react-router-dom';
 import Profile from '../Profile/Profile';
+import SearchForFriends from './searchForUser';
 
 const Home = () => {
 
@@ -21,11 +22,7 @@ const Home = () => {
         </Routes>
       </div>
       <div className="home-right-section">
-        <input
-          type="text"
-          className="search-box"
-          placeholder="Search on Twitter"
-        />
+        <SearchForFriends />
         <TrendingHashtags />
       </div>
     </div>
