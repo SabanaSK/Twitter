@@ -17,7 +17,7 @@ const Home = () => {
       <div className="home-main-section">
         <Routes>
           <Route path="/" element={<TweetsList />} />
-          <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </div>
       <div className="home-right-section">

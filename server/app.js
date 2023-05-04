@@ -204,6 +204,25 @@ app.get('/tweets', async (req, res) => {
   }
 });
 
+app.get('/tweets/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const userTweets = await Post.find({ author: userId });
+
+    const user = await User.findById(userId);
+    const tweetsWithUserInfo = userTweets.map(tweet => ({
+      ...tweet._doc,
+      username: user.username,
+      nickname: user.nickname,
+    }));
+
+    res.send(tweetsWithUserInfo);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Error fetching user tweets');
+  }
+});
+
 
 app.post("/tweet", authMiddleware, async (request, response) => {
   try {

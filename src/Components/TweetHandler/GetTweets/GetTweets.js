@@ -23,7 +23,7 @@ export default function GetTweets() {
             <ul>
                 {tweets.map((tweet, index) => (
                     <li key={index} className="get-tweet">
-                        <strong>{tweet.username} ({tweet.nickname}):</strong> {tweet.text}
+                        <strong> {tweet.username} {tweet.nickname} </strong> {tweet.text}
                     </li>
                 ))}
             </ul>
