@@ -32,7 +32,7 @@ const SearchForFriends = () => {
     setSearchStarted(true);
   };
 
-  
+
 
   return (
     <div>
@@ -45,8 +45,8 @@ const SearchForFriends = () => {
 
       <ul>
         {filteredUsers.map((user) => (
-          <li key={user.id}>
-            <Link to={`/users/${user.id}`}>{user.username}</Link>
+          <li key={user._id}>
+            <Link to={`/users/profile/${user._id}`}>{user.username}</Link>
           </li>
         ))}
       </ul>
