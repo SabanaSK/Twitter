@@ -11,9 +11,10 @@ export default function SubmittedTweet(props) {
             const token = localStorage.getItem('token');
             if (token) {
                 const decoded = jwt_decode(token);
-                console.log('decoded:', decoded);
                 const userId = decoded.userId;
                 console.log('userId:', userId);
+                console.log('decoded:', decoded);
+                console.log('currentUser:', currentUser);
                 try {
                     const response = await axios.get(`http://localhost:3001/users/${userId}`);
                     setCurrentUser(response.data);

@@ -46,15 +46,22 @@ app.get('/search', async (req, res) => {
   }
 });
 
-app.get("/users/:id/:userId", async (request, response) => {
+app.get("/users/:id", async (request, response) => {
   try {
-    const users = await User.find({});
-    response.status(200).send(users);
+    const userId = request.params.id;
+    const user = await User.findById(userId);
+
+    if (user) {
+      response.status(200).send(user);
+    } else {
+      response.status(404).send("User not found");
+    }
   } catch (error) {
     /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });
+
 
 app.get("/homeuser", async (request, response) => {
   try {
