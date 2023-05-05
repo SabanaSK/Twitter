@@ -165,26 +165,6 @@ app.post("/login", async (request, response) => {
   }
 });
 
-// make a post request for follow user
-app.post('/users/:id/followers', async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const followerId = req.body.followerId;
-    /* console.log(followerId); */
-
-    // Add the follower ID to the followers array of the user
-    const user = await User.findById(userId);
-    user.followers.push(followerId);
-    await user.save();
-
-    res.sendStatus(200);
-  } catch (error) {
-    /* console.log(error.message); */
-    res.sendStatus(500);
-  }
-});
-
-
 app.get('/tweets', async (req, res) => {
   try {
     const tweets = await Post.find().lean().exec();
@@ -268,5 +248,46 @@ app.get("/users/:id", async (request, response) => {
   }
 });
 
+//follow
+app.post("/users/:id/follow", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const currentUserId = req.body.currentUserId;
+    const action = req.body.action; // "follow" or "unfollow"
+    const [currentUser, userToFollow] = await Promise.all([
+      User.findById(currentUserId),
+      User.findById(userId),
+    ]);
+    console.log("CurentUser", currentUser, userToFollow)
+    console.log("CurrentUserId", currentUserId, userId)
+    if (action === "follow") {
+
+      if (!currentUser.following.some((id) => id.equals(userToFollow._id))) {
+        currentUser.following.push(userToFollow._id);
+      }
+      if (!userToFollow.followers.some((id) => id.equals(currentUser._id))) {
+        userToFollow.followers.push(currentUser._id);
+      }
+    } else if (action === "unfollow") {
+
+      currentUser.following = currentUser.following.filter(
+        (id) => !id.equals(userToFollow._id)
+      );
+      userToFollow.followers = userToFollow.followers.filter(
+        (id) => !id.equals(currentUser._id)
+      );
+    } else {
+      res.status(400).json({ message: "Invalid action" });
+      return;
+    }
+
+    await Promise.all([currentUser.save(), userToFollow.save()]);
+
+    res.status(200).json({ message: `Successfully ${action}ed the user` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while updating the follow relationship" });
+  }
+});
 
 export default app;
