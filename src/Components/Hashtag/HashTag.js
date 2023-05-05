@@ -1,29 +1,38 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import classes from "./Hashtags.module.css";
-import { Link } from 'react-router-dom'; //new addition
-import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Hashtags = ({ hashtags }) =>
 {
-  const [ tweets, setTweets ] = useState([]);//new addition
+  const [ tweets, setTweets ] = useState([]);
 
   useEffect(() =>
   {
     async function fetchTweets ()
     {
-      const response = await fetch('/api/tweets');
-      const data = await response.json();
-      setTweets(data);
+      const response = await axios.get('http://localhost:3001/tweets/');
+      setTweets(response.data);
     }
 
     fetchTweets();
   }, []);
 
+  const getHashtags = (text) =>
+  {
+    const regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+    const hashtags = [];
+    let match;
+    while ((match = regex.exec(text)))
+    {
+      hashtags.push(match[ 1 ]);
+    }
+    return hashtags;
+  }
+
   const hashtagList = tweets.reduce((hashtags, tweet) =>
   {
-    const regex = /#[\w]+/g;
-    const matches = tweet.content.match(regex);
+    const matches = getHashtags(tweet.content);
     if (matches)
     {
       matches.forEach((match) =>
@@ -38,33 +47,21 @@ const Hashtags = ({ hashtags }) =>
     return hashtags;
   }, []);
 
+
   return (
     <div className={classes.hashtags}>
-      {hashtagList.map((hashtag, index) =>
-      {
-        if (index < 10)
-        { // limit to 10 hashtags
-          const tag = hashtag.split(" ")[ 0 ]; // get the hashtag word
-          return (
-            <div className="hashtag-list">
-              <h3>Trending Hashtags</h3>
-              <ul>
-                {hashtagList.map((tag) => (
-                  <li key={tag}>
-                    <Link to={`/hashtag/${ tag }`}>#{tag}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        } else
-        {
-          return null; // skip hashtags after the 10th
-        }
-      })}
+      <div className="hashtag-list">
+        <h3>Trending Hashtags</h3>
+        <ul>
+          {hashtagList.slice(0, 10).map((hashtag, index) => (
+            <li key={index}>
+              <Link to={`/hashtags/${ hashtag }`}>#{hashtag}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
 
 export default Hashtags;
-

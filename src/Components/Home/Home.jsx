@@ -6,8 +6,10 @@ import './Home.css';
 import { Link, Route, Routes } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import SearchForFriends from './searchForUser';
+import Hashtags from '../Hashtag/HashTag';
 
-const Home = () => {
+const Home = () =>
+{
 
 
   return (
@@ -23,6 +25,7 @@ const Home = () => {
       </div>
       <div className="home-right-section">
         <SearchForFriends />
+        <Hashtags />
         <TrendingHashtags />
       </div>
     </div>
