@@ -258,8 +258,6 @@ app.post("/users/:id/follow", async (req, res) => {
       User.findById(currentUserId),
       User.findById(userId),
     ]);
-    console.log("CurentUser", currentUser, userToFollow)
-    console.log("CurrentUserId", currentUserId, userId)
     if (action === "follow") {
 
       if (!currentUser.following.some((id) => id.equals(userToFollow._id))) {
