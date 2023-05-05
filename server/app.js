@@ -32,13 +32,35 @@ app.get("/", (request, response, next) => {
   response.json({ message: "Hey! This is your server response!" });
   next();
 });
+//All Users
+app.get("/users", async (request, response) => {
+  try {
+    const users = await User.find();
+    response.status(200).send(users);
+  } catch (error) {
+    response.status(500).send("Internal server error");
+  }
+});
+
+app.get("/users/profile/:id", async (request, response) => {
+  try {
+    const user = await User.findById(request.params.id);
+    if (user) {
+      response.status(200).send(user);
+    } else {
+      response.status(404).send("User not found");
+    }
+  } catch (error) {
+    response.status(500).send("Internal server error");
+  }
+});
 
 app.get('/search', async (req, res) => {
   const searchQuery = req.query.search;
 
   try {
     const users = await User.find({ username: { $regex: searchQuery, $options: 'i' } });
-    console.log("hello")
+    /*     console.log("hello") */
     res.json(users);
   } catch (error) {
     console.error(error);
@@ -46,15 +68,6 @@ app.get('/search', async (req, res) => {
   }
 });
 
-app.get("/users/:id/:userId", async (request, response) => {
-  try {
-    const users = await User.find({});
-    response.status(200).send(users);
-  } catch (error) {
-    /*     console.log(error); */
-    response.status(500).send("Internal server error");
-  }
-});
 
 app.get("/homeuser", async (request, response) => {
   try {
@@ -151,8 +164,8 @@ app.post("/login", async (request, response) => {
     });
   }
 });
-// make a post request for follow user
 
+// make a post request for follow user
 app.post('/users/:id/followers', async (req, res) => {
   try {
     const userId = req.params.id;
@@ -204,6 +217,7 @@ app.get('/tweets', async (req, res) => {
   }
 });
 
+// Get tweets for a specific user
 app.get('/tweets/:id', async (req, res) => {
   try {
     const userId = req.params.id;
@@ -223,7 +237,7 @@ app.get('/tweets/:id', async (req, res) => {
   }
 });
 
-
+// Get tweets for a specific user
 app.post("/tweet", authMiddleware, async (request, response) => {
   try {
     const { userId } = request.user;
@@ -237,6 +251,22 @@ app.post("/tweet", authMiddleware, async (request, response) => {
   }
 });
 
+//SubmittedTweet
+app.get("/users/:id", async (request, response) => {
+  try {
+    const userId = request.params.id;
+    const user = await User.findById(userId);
+
+    if (user) {
+      response.status(200).send(user);
+    } else {
+      response.status(404).send("User not found");
+    }
+  } catch (error) {
+    /*     console.log(error); */
+    response.status(500).send("Internal server error");
+  }
+});
 
 
 export default app;

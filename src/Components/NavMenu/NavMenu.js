@@ -20,9 +20,6 @@ const NavMenu = () => {
                     {loggedUserId && (<li>
                         <Link className='nav-menu-link' to={`profile/${loggedUserId}`}>Profile</Link>
                     </li>)}
-                    <li>
-                        <Link className='nav-menu-link' to="/settings">Settings</Link>
-                    </li>
                 </ul>
                 <ProfileMenu loggedUserId={loggedUserId}/>
             </nav>
