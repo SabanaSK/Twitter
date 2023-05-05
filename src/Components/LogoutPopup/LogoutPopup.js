@@ -1,7 +1,8 @@
 import React from 'react';
 import './LogoutPopup.css';
+import { Link } from 'react-router-dom';
 
-const LogoutPopup = ({ showPopup, onClose }) => {
+const LogoutPopup = ({ showPopup, onClose, onChanel }) => {
     const handleLogout = () => {
         // Perform logout actions here
         localStorage.removeItem('token');
@@ -18,8 +19,8 @@ const LogoutPopup = ({ showPopup, onClose }) => {
                     <button className="button primary-button" onClick={handleLogout}>
                         Log out
                     </button>
-                    <button className="button alternative-button" onClick={onClose}>
-                        Cancel
+                    <button className="button alternative-button" onClick={onChanel}> 
+                    Cancel
                     </button>
                 </div>
             </div>
@@ -28,3 +29,4 @@ const LogoutPopup = ({ showPopup, onClose }) => {
 };
 
 export default LogoutPopup;
+

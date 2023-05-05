@@ -21,10 +21,11 @@ const NavMenu = () => {
                         <Link className='nav-menu-link' to={`profile/${loggedUserId}`}>Profile</Link>
                     </li>)}
                 </ul>
-                <ProfileMenu />
+                <ProfileMenu loggedUserId={loggedUserId}/>
             </nav>
         </div>
     );
 };
 
 export default NavMenu;
+
