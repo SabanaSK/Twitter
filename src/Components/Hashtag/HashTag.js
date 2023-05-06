@@ -46,8 +46,6 @@ const Hashtags = ({ hashtags }) =>
     }
     return hashtags;
   }, []);
-
-
   return (
     <div className={classes.hashtags}>
       <div className="hashtag-list">
@@ -65,3 +63,4 @@ const Hashtags = ({ hashtags }) =>
 };
 
 export default Hashtags;
+

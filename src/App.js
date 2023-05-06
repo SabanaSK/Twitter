@@ -8,8 +8,10 @@ import LogOut from './Components/LogInLogOut/LogOut';
 import Home from './Components/Home/Home'
 import OtherUserProfileLayout from './Components/OtherUsersProfiles/OtherUserProfileLayout';
 
+import HashTagPage from './Components/Hashtag/HashTagPage';
 
-function App() {
+function App ()
+{
 
   return (
     <>
@@ -22,6 +24,7 @@ function App() {
         <Route path="/edit/:id" element={<EditPage />} />
         <Route path="/logout" element={<LogOut />} />
         <Route path="/home/*" element={<Home />} />
+        <Route path="/hashtags/:hashtag" element={<HashTagPage />} />
       </Routes>
     </>
   );

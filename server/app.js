@@ -298,22 +298,33 @@ app.get('/tweets/:id', async (req, res) =>
   }
 });
 
-// Get tweets for a specific user
+
+
 app.post("/tweet", authMiddleware, async (request, response) =>
 {
   try
   {
     const { userId } = request.user;
     const { text } = request.body;
-    const tweet = new Post({ author: userId, text });
+
+    // Extract hashtags from the tweet text
+    const hashtags = text.match(/#\w+/g) || [];
+
+    const tweet = new Post({
+      author: userId,
+      text: text,
+      hashtags: hashtags // Add hashtags to the Post model
+    });
+
     const savedTweet = await tweet.save();
     response.status(201).send(savedTweet);
   } catch (error)
   {
-    /*     console.log(error); */
+    console.error(error);
     response.status(500).send("Internal server error");
   }
 });
+
 
 //SubmittedTweet
 app.get("/users/:id", async (request, response) =>
@@ -388,3 +399,7 @@ app.post("/users/:id/follow", async (req, res) =>
 });
 
 export default app;
+
+
+
+

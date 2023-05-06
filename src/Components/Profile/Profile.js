@@ -7,53 +7,62 @@ import { Link } from 'react-router-dom';
 import EditProfile from './EditPage';
 
 
-const Profile = () => {
+const Profile = () =>
+{
   const { id } = useParams();
-
-  const [profileData, setProfileData] = useState(null);
-  const [tweets, setTweets] = useState([]);
-  const [showEdit, setShowEdit] = useState(false);
-
+  const [ profileData, setProfileData ] = useState(null);
+  const [ tweets, setTweets ] = useState([]);
+  const [ showEdit, setShowEdit ] = useState(false);
   const jwt = localStorage.getItem("token");
   const loggedUserId = jwt ? jwt_decode(jwt).userId : null;
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/profile/${id}`);
+  useEffect(() =>
+  {
+    const fetchProfile = async () =>
+    {
+      try
+      {
+        const response = await axios.get(`http://localhost:3001/profile/${ id }`);
         setProfileData(response.data);
 
-      } catch (error) {
+      } catch (error)
+      {
         console.log(error);
       }
     };
     fetchProfile();
-  }, [id]);
+  }, [ id ]);
 
-  useEffect(() => {
-    const fetchProfileTweets = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/tweets/${id}`);
+  useEffect(() =>
+  {
+    const fetchProfileTweets = async () =>
+    {
+      try
+      {
+        const response = await axios.get(`http://localhost:3001/tweets/${ id }`);
         setTweets(response.data);
 
-      } catch (error) {
+      } catch (error)
+      {
         console.log(error);
       }
     };
     fetchProfileTweets();
-  }, [id]);
+  }, [ id ]);
 
 
-  if (!profileData) {
+  if (!profileData)
+  {
     return <p>Loading...</p>;
   }
-
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = () =>
+  {
     setShowEdit(true);
 
   }
 
-  const handleCancelClick = () => {
+  const handleCancelClick = () =>
+  {
     setShowEdit(false);
   }
 
@@ -63,6 +72,7 @@ const Profile = () => {
     profileData.avatarImageUrl && profileData.avatarImageUrl !== ""
       ? profileData.avatarImageUrl
       : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png";
+
 
   return (
     <div className="profile">
@@ -85,8 +95,8 @@ const Profile = () => {
         </ul>
 
         <div>
-          <li><Link to={`/following${id}`}>Following</Link>: {profileData.followingCount}</li>
-          <li><Link to={`/followers${id}`}>Followers</Link>: {profileData.followersCount}</li>
+          <li><Link to={`/following${ id }`}>Following</Link>: {profileData.followingCount}</li>
+          <li><Link to={`/followers${ id }`}>Followers</Link>: {profileData.followersCount}</li>
           {showEdit && (
             <div>
               <EditProfile profileData={profileData} />
@@ -103,11 +113,10 @@ const Profile = () => {
             <p>{tweet.nickname}</p>
             <p>{tweet.text}</p>
             <p>{tweet.createdAt}</p>
+
           </div>
         ))}
       </div>
-
-
     </div>
   );
 };
@@ -125,89 +134,3 @@ export default Profile;
 
 
 
-/*import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
-import "./Profile.css";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Link } from 'react-router-dom';
-import EditProfile from './EditPage';
-import { response } from "express";
-
-const Profile = () => {
-  const { userId } = useParams();
-
-  const [profileData, setProfileData] = useState(null);
-  const [showEdit, setShowEdit] = useState(false);
-
-  const jwt = localStorage.getItem("token");
-  const loggedUserId = jwt ? jwt_decode(jwt).userId : null;
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/profile/${userID}}`);
-        setProfileData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProfile();
-  }, [userId]);
-
-  if (!profileData) {
-    return <p>Loading...</p>;
-  }
-
-  const handleEditButtonClick = () => {
-    setShowEdit(true);
-
-  }
-
-  const handleCancelClick = () => {
-    setShowEdit(false);
-  }
-
-
-  const avatarSrc =
-    profileData.avatarImageUrl && profileData.avatarImageUrl !== ""
-      ? profileData.avatarImageUrl
-      : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png";
-
-  return (
-    <div className="profile">
-      <img className="profile-banner" src="https://via.placeholder.com/600x200" alt="Profile banner" />
-      <div className="profile-info">
-        <img className="profile-avatar" src={avatarSrc} alt="Profile avatar" />
-        {userId === loggedUserId ? (
-          <button className="edit-button"onClick={handleEditButtonClick}>Edit</button>
-        ) : (
-          <button className="follow-button">Follow</button>
-        )}
-        <h2 className="profile-name">{profileData.name}</h2>
-        <h3 className="profile-username">@{profileData.username}</h3>
-        <p >{profileData.about}</p>
-        <ul>
-          <li>{profileData.employment}</li>
-          <li>{profileData.city}</li>
-          <li>{profileData.web}</li>
-          <li>{profileData.registerDate}</li>
-        </ul>
-        <div>
-        <li><Link to={`/following${userId}`}>Following</Link>: {profileData.followingCount}</li>
-         <li><Link to={`/followers${userId}`}>Followers</Link>: {profileData.followersCount}</li>
-      </div>
-
-      </div>
-
-      {showEdit && (
-            <div>
-               <EditProfile profileData={profileData} />
-                <button onClick={handleCancelClick}>Cancel</button>
-            </div>
-          )}
-    </div>
-  );
-};
-
-export default Profile;*/

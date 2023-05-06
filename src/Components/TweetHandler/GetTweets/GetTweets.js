@@ -19,11 +19,9 @@ export default function GetTweets ()
                 console.error('Error:', error);
             }
         };
-
         fetchTweets();
     }, []);
     return (
-
         <div>
             <ul>
                 {tweets.map((tweet, index) => (

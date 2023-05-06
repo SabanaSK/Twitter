@@ -12,8 +12,8 @@ const PostSchema = mongoose.Schema(
       required: true,
     },
     hashtags: {
-      type: [ String ],
-      default: [],
+      type: [ String ]
+
     },
     createdAt: {
       type: Date,
@@ -22,6 +22,5 @@ const PostSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
-
 export default mongoose.model("Post", PostSchema);
 
