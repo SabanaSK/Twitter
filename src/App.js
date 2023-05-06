@@ -7,7 +7,8 @@ import EditPage from './Components/Profile/EditPage'
 import LogOut from './Components/LogInLogOut/LogOut';
 import Home from './Components/Home/Home'
 import OtherUserProfileLayout from './Components/OtherUsersProfiles/OtherUserProfileLayout';
-
+import FollowersList from './Components/Follow/Followers';
+import FollowingList from './Components/Follow/Following';
 import HashTagPage from './Components/Hashtag/HashTagPage';
 
 function App ()
@@ -25,6 +26,9 @@ function App ()
         <Route path="/logout" element={<LogOut />} />
         <Route path="/home/*" element={<Home />} />
         <Route path="/hashtags/:hashtag/*" element={<HashTagPage />} />
+        <Route path="/users/:id/followers" element={<FollowersList />} />
+        <Route path="/users/:id/following" element={<FollowingList />} />
+
       </Routes>
     </>
   );
