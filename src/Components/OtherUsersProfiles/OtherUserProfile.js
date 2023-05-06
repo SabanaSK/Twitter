@@ -112,7 +112,6 @@ const OtherUserProfilePage = () => {
             </Link>
           </li>
         </div>
-
       </div>
       <div>
         {tweets.map(tweet => (
