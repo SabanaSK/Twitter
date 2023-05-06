@@ -7,55 +7,64 @@ import { Link } from 'react-router-dom';
 import EditProfile from './EditPage';
 
 
-const Profile = () => {
+const Profile = () =>
+{
   const { id } = useParams();
-  const [profileData, setProfileData] = useState(null);
-  const [tweets, setTweets] = useState([]);
-  const [showEdit, setShowEdit] = useState(false);
+  const [ profileData, setProfileData ] = useState(null);
+  const [ tweets, setTweets ] = useState([]);
+  const [ showEdit, setShowEdit ] = useState(false);
   const jwt = localStorage.getItem("token");
   const loggedUserId = jwt ? jwt_decode(jwt).userId : null;
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/profile/${id}`);
+  useEffect(() =>
+  {
+    const fetchProfile = async () =>
+    {
+      try
+      {
+        const response = await axios.get(`http://localhost:3001/profile/${ id }`);
         setProfileData(response.data);
 
-      } catch (error) {
+      } catch (error)
+      {
         console.log(error);
       }
     };
     fetchProfile();
-  }, [id]);
+  }, [ id ]);
 
-  useEffect(() => {
-    const fetchProfileTweets = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/tweets/${id}`);
+  useEffect(() =>
+  {
+    const fetchProfileTweets = async () =>
+    {
+      try
+      {
+        const response = await axios.get(`http://localhost:3001/tweets/${ id }`);
         setTweets(response.data);
 
-      } catch (error) {
+      } catch (error)
+      {
         console.log(error);
       }
     };
     fetchProfileTweets();
-  }, [id]);
+  }, [ id ]);
 
 
-  if (!profileData) {
+  if (!profileData)
+  {
     return <p>Loading...</p>;
   }
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = () =>
+  {
     setShowEdit(true);
 
   }
 
-  const handleCancelClick = () => {
+  const handleCancelClick = () =>
+  {
     setShowEdit(false);
   }
-
-
-
   const avatarSrc =
     profileData.avatarImageUrl && profileData.avatarImageUrl !== ""
       ? profileData.avatarImageUrl
@@ -83,12 +92,12 @@ const Profile = () => {
         </ul>
         <div>
           <li>
-            <Link to={`/users/${id}/following`}>
+            <Link to={`/users/${ id }/following`}>
               <p> {profileData.following.length} Following</p>
             </Link>
           </li>
           <li>
-            <Link to={`/users/${id}/followers`}>
+            <Link to={`/users/${ id }/followers`}>
               <p>{profileData.followers.length} Followers</p>
             </Link>
           </li>

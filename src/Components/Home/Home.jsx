@@ -10,8 +10,6 @@ import Hashtags from '../Hashtag/HashTag';
 
 const Home = () =>
 {
-
-
   return (
     <div className="home">
       <div className="home-left-section">
