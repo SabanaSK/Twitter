@@ -43,13 +43,15 @@ const SearchForFriends = () => {
         placeholder="Search on Twitter..."
       />
 
-      <ul>
-        {filteredUsers.map((user) => (
-          <li key={user._id}>
-            <Link to={`/users/profile/${user._id}`}>{user.username}</Link>
-          </li>
-        ))}
-      </ul>
+{searchQuery.length > 0 && (
+        <ul>
+          {filteredUsers.map((user) => (
+            <li key={user._id}>
+              <Link to={`/users/profile/${user._id}`}>{user.username}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

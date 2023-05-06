@@ -19,9 +19,9 @@ export default function PostTweet (props)
         setHashtags(text.match(/#\w+/g));
     }
 
-    const handleSubmit = async (e) =>
+    const handleSubmit = async () =>
     {
-        e.preventDefault();
+        
 
         try
         {
