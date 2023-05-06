@@ -111,7 +111,20 @@ const Profile = () =>
           <div key={tweet._id} className="get-tweets">
             <h3>{tweet.username}</h3>
             <p>{tweet.nickname}</p>
-            <p>{tweet.text}</p>
+            <p>
+              {tweet.text.split(' ').map((word, index) =>
+              {
+                if (word.startsWith('#'))
+                {
+                  return (
+                    <Link key={index} to={`/hashtags/${ word.slice(1) }`}>{word} </Link>
+                  );
+                } else
+                {
+                  return `${ word } `;
+                }
+              })}
+            </p>
             <p>{tweet.createdAt}</p>
 
           </div>

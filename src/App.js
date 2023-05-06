@@ -24,7 +24,7 @@ function App ()
         <Route path="/edit/:id" element={<EditPage />} />
         <Route path="/logout" element={<LogOut />} />
         <Route path="/home/*" element={<Home />} />
-        <Route path="/hashtags/:hashtag" element={<HashTagPage />} />
+        <Route path="/hashtags/:hashtag/*" element={<HashTagPage />} />
       </Routes>
     </>
   );
