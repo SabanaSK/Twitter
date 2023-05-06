@@ -25,12 +25,19 @@ const OtherUserProfilePage = () => {
       try {
         const response = await axios.get(`http://localhost:3001/users/profile/${id}`);
         setProfileData(response.data);
+
+        if (currentUserId && response.data.followers && response.data.followers.includes(currentUserId)) {
+          setIsFollowing(true);
+        }
+
       } catch (error) {
         console.log(error);
       }
     };
     fetchProfile();
-  }, [id]);
+  }, [id, currentUserId]);
+
+
 
   useEffect(() => {
     const fetchProfileTweets = async () => {
@@ -78,9 +85,12 @@ const OtherUserProfilePage = () => {
         <img className="profile-avatar" src={avatarSrc} alt="Profile avatar" />
         <button
           className="follow-button"
-          onClick={() => toggleFollow(currentUserId, id)} >
+          onClick={() => toggleFollow(currentUserId, id)}
+          disabled={currentUserId === id}
+        >
           {isFollowing ? "Unfollow" : "Follow"}
         </button>
+
         <h2 className="profile-name">{profileData.username}</h2>
         <h3 className="profile-username">@{profileData.nickname}</h3>
         <p >{profileData.about}</p>
@@ -91,9 +101,18 @@ const OtherUserProfilePage = () => {
           <li>{profileData.registerDate}</li>
         </ul>
         <div>
-          <li><Link to={`/following${id}`}>Following</Link>: {profileData.followingCount}</li>
-          <li><Link to={`/followers${id}`}>Followers</Link>: {profileData.followersCount}</li>
+          <li>
+            <Link to={`/users/${id}/following`}>
+              <p> {profileData.following.length} Following</p>
+            </Link>
+          </li>
+          <li>
+            <Link to={`/users/${id}/followers`}>
+              <p>{profileData.followers.length} Followers</p>
+            </Link>
+          </li>
         </div>
+
       </div>
       <div>
         {tweets.map(tweet => (
