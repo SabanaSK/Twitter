@@ -18,15 +18,17 @@ export default function GetTweets() {
 
         fetchTweets();
     }, []);
+    
     return (
-
         <div>
             <ul>
-                {tweets.map((tweet, index) => (
+                {tweets.slice().reverse().map((tweet, index) => ( // reversed order
                     <li key={index} className="get-tweet">
-                        <strong>  <Link to={`/users/profile/${tweet.author}`}> {/* Add this link */}
-                            {tweet.username} {tweet.nickname}
-                        </Link></strong>
+                        <strong>
+                            <Link to={`/users/profile/${tweet.author}`}>
+                                {tweet.username} {tweet.nickname}
+                            </Link>
+                        </strong>
                         {tweet.text.split(' ').map((word, index) => (
                             word.startsWith('#') ?
                                 <a href={`/hashtags/${word.slice(1)}`} key={index}>{word} </a> : word + ' '
@@ -38,3 +40,4 @@ export default function GetTweets() {
         </div>
     );
 }
+

@@ -3,9 +3,12 @@ import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import './SubmittedTweet.css';
 
+
 export default function SubmittedTweet (props)
 {
     const [ currentUser, setCurrentUser ] = useState({});
+
+    
 
     useEffect(() =>
     {
@@ -36,7 +39,6 @@ export default function SubmittedTweet (props)
 
     return props.show ? (
         <div className="submitted-tweet">
-            <strong>{currentUser.username} {currentUser.nickname}</strong>
             {props.tweet.split(' ').map((word, index) => (
                 word.startsWith('#') ?
                     <a href={`/hashtags/${ word.slice(1) }`} key={index}>{word} </a> : word + ' '

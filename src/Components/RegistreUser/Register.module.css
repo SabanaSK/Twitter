@@ -55,6 +55,16 @@ h1 {
   margin-left: 20px;
 }
 
+.passwordtext {
+  color: gray;
+  margin-left: 20px;
+}
+
+.emailtext {
+  color: gray;
+  margin-left: 20px;
+}
+
 input:hover {
   border: blue;
 }

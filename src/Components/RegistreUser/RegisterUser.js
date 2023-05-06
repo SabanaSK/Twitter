@@ -129,6 +129,7 @@ export default function RegisterUser (props)
             <img className={classes.img} src={imagePath} alt="example" />
             <h1>Create An Account</h1>
 
+            <p className={`${classes.emailtext}`}>Email must contain an @.</p>
             <div
               className={`${ classes.control } ${ emailIsValid === false ? classes.invalid : ""
                 }`}
@@ -160,7 +161,9 @@ export default function RegisterUser (props)
               />
             </div>
 
+            <p className={`${classes.passwordtext}`}>The password must contain at least seven characters.</p>
             <div
+            
               className={`${ classes.control } ${ passwordIsValid === false ? classes.invalid : ""
                 }`}
             >

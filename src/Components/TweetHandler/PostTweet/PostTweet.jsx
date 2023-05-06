@@ -2,12 +2,17 @@ import axios from 'axios';
 import { React, useState } from 'react';
 import './PostTweet.css';
 
+
 export default function PostTweet (props)
 {
     const [ postText, setPostText ] = useState('');
     const [ isButtonDisabled, setIsButtonDisabled ] = useState(true);
     const [ message, setMessage ] = useState(null);
     const [ hashtags, setHashtags ] = useState([]);
+
+
+    
+    
 
     const handleInputChange = (e) =>
     {
@@ -21,6 +26,7 @@ export default function PostTweet (props)
 
     const handleSubmit = async () =>
     {
+        
         
 
         try
@@ -56,7 +62,7 @@ export default function PostTweet (props)
                         <span key={index} className="hashtag">{tag}</span>
                     ))}
                 </div>
-                <div className="bottom-content">
+                <div className="bottom-content"> 
                     {message && <div className={('message ' + message.type)}>{message.statusMessage}</div>}
                     <button className="post-tweet-button" type="submit" disabled={isButtonDisabled} >
                         Tweet
