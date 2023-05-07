@@ -1,3 +1,12 @@
+.img {
+  width: 50px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+
+}
+
 .register {
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -10,31 +19,12 @@
   margin-top: 147px;
 }
 
-/* .form {
-  margin: 0 30px;
-} */
-/* 
-body,
-div,
-h1,
-form,
-input {
-  padding: 0;
-  margin: 10px;
-   outline: none; 
-  font-family: Roboto, Arial, sans-serif;
-  font-size: 16px;
-  color: #666;
-  width: 80%;
-  margin-left: 20px;
-} */
-
 h1 {
   padding: 10px 0;
   font-size: 32px;
   font-weight: 300;
   text-align: center;
-  color: skyblue;
+  color: rgb(0, 9, 12);
 }
 
 .control {
@@ -42,18 +32,22 @@ h1 {
   display: flex;
   align-items: stretch;
   flex-direction: column;
+  width: 350px;
 }
+
 
 
 
 .control input {
-  flex: 0.5;
   font: inherit;
   padding: 0.35rem 0.35rem;
-  border-radius: 6px;
+  border-radius: 9999px;
   border: 1px solid light gray;
   margin-left: 20px;
+  width: 100%;
 }
+
+
 
 .passwordtext {
   color: gray;
@@ -65,45 +59,81 @@ h1 {
   margin-left: 20px;
 }
 
-input:hover {
-  border: blue;
-}
 
 
 input:focus {
   outline: none;
-  border-color: skyblue;
+  border-color: rgb(20, 20, 21);
   background: #f6dbfc;
 }
 
-/* .control.invalid input {
-  border-color: red;
-  background: #fbdada;
-} */
+
+
+
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
 
 .actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
   text-align: center;
 }
 
-.img {
-  width: 50px;
-  height: 50px;
-  margin: auto;
-  display: block;
+.btn {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000509;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 290px;
+}
+
+.btn:hover {
+  background-color: #0c8bd6;
+}
+
+input:hover {
+  border: 1px solid black;
+}
+
+
+
+.emailtext,
+.passwordtext {
+  margin: 0;
+  color: gray;
+  font-size: 0.75rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.invalid input {
+  border-color: red;
+  background: #fbdada;
 }
 
 @media (min-width: 768px) {
   .control {
-    align-items: center;
     flex-direction: row;
   }
 
-}
-
-.img {
-  width: 50px;
-  height: 50px;
-  margin-left: 40%;
-  margin-right: 10px;
-
+  .control input {
+    flex: 1;
+    margin-left: 1rem;
+  }
 }

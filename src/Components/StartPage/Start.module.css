@@ -47,6 +47,14 @@ input:focus {
   border-color: #1da1f2;
 }
 
+.div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+
 .button {
   padding: 8px 12px;
   background-color: #000000;
@@ -57,7 +65,11 @@ input:focus {
   margin-top: 16px;
   font-size: 16px;
   cursor: pointer;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .button:hover {
   background-color: #1da1f2;
 }

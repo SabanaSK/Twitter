@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import classes from './Start.module.css';
 
-export default function StartPage() {
+export default function StartPage ()
+{
   const navigate = useNavigate();
   const location = useLocation();
-  const [loginInfo, setLoginInfo] = useState({
+  const [ loginInfo, setLoginInfo ] = useState({
     emailOrUsername: '',
   });
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [ formIsValid, setFormIsValid ] = useState(false);
 
-  const inputChangeHandler = (event) => {
+  const inputChangeHandler = (event) =>
+  {
     const fieldValue = event.target.value.trim();
 
-    setLoginInfo((prevState) => {
+    setLoginInfo((prevState) =>
+    {
       return {
         ...prevState,
         emailOrUsername: fieldValue,
@@ -23,7 +26,8 @@ export default function StartPage() {
     setFormIsValid(fieldValue !== '');
   };
 
-  const nextPageHandler = (event) => {
+  const nextPageHandler = (event) =>
+  {
     event.preventDefault();
     navigate('/login', {
       state: {
@@ -31,6 +35,10 @@ export default function StartPage() {
       }
     });
   };
+  const registerHandler = () =>
+  {
+    navigate('/register');
+  }
 
   return (
     <div className={classes.login}>
@@ -54,16 +62,16 @@ export default function StartPage() {
             placeholder="Email or Username"
           />
           <br />
-          <button type="submit" className={classes.button}>
-            Next
-          </button>
+          <div className={classes.div}>
+            <button type="submit" className={classes.button}>
+              Next
+            </button>
+            <h1 className={classes.loginH1}>New to Twitter?</h1>
+            <button className={classes.button} onClick={registerHandler}>
+              Register here
+            </button>
+          </div>
         </form>
-        <div className={classes.div}>
-          <p className={classes.p}>New to Twitter?</p>
-          <Link to="/register" className={classes.link}>
-            Register here
-          </Link>
-        </div>
       </div>
     </div>
   );
