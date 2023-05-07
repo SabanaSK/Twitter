@@ -8,6 +8,26 @@ import User from "./db/user.js";
 import dbConnect from "./db/database.js";
 const app = express();
 dbConnect();
+
+async function getTrendingHashtags() {
+  try {
+    const hashtags = await Post.aggregate([
+      { $unwind: "$hashtags" },
+      { $group: { _id: "$hashtags", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 3 },
+    ]);
+
+    return hashtags.map((hashtag) => ({
+      name: hashtag._id,
+      tweets: `${hashtag.count}`,
+    }));
+  } catch (error) {
+    throw new Error("Failed to fetch trending hashtags");
+  }
+}
+
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -213,25 +233,6 @@ app.get('/hashtags/:hashtag', async (req, res) => {
   }
 });
 
-async function getTrendingHashtags() {
-  try {
-    const hashtags = await Post.aggregate([
-      { $unwind: "$hashtags" },
-      { $group: { _id: "$hashtags", count: { $sum: 1 } } },
-      { $sort: { count: -1 } },
-      { $limit: 3 }, 
-    ]);
-
-    return hashtags.map((hashtag) => ({
-      name: hashtag._id,
-      tweets: `${hashtag.count}k`,
-    }));
-  } catch (error) {
-    throw new Error("Failed to fetch trending hashtags");
-  }
-}
-
-
 app.get("/trending-hashtags", async (req, res) => {
   try {
     const trendingHashtags = await getTrendingHashtags();
@@ -241,8 +242,6 @@ app.get("/trending-hashtags", async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-
-
 
 
 // Get tweets for a specific user
