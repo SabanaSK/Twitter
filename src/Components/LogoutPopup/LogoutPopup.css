@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
-  cursor: auto;
+  cursor: pointer;
 }
 
 .popup {
@@ -19,15 +19,27 @@
   max-width: 90%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  background: #0c0c0c;
-  color: white;
-  text-align: center;
+  background: #f5f5f5;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup svg {
+  fill: #00bfff;
+  height: 40px;
+  width: 40px;
+  margin-bottom: 20px;
 }
 
 .popup-title {
   font-size: 18px;
   font-weight: bold;
-  margin: 50px auto;
+  margin: 0;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .buttons-container {
@@ -36,22 +48,31 @@
 }
 
 .button {
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px 20px;
+  padding: 8px 12px;
+  background-color: #010e15;
+  color: #fff;
   border-radius: 9999px;
+  border: none;
+  outline: none;
+  margin-top: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.button:hover {
+  background-color: #00bfff;
+  color: #fff;
 }
 
 .primary-button {
-  background-color: white;
-  color: black;
+  background-color: #1e0202;
+  color: white;
   margin-bottom: 10px;
 }
 
 .alternative-button {
-  color: white;
-  border: 1.5px solid white;
+  color: #0b0101;
+  border: 1.5px solid #fff;
   background: none;
 }
