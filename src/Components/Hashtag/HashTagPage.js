@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 export default function HashTagPage() {
   const { hashtag } = useParams();
   const [tweets, setTweets] = useState([]);
-
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchTweets = async () => {
       try {
@@ -25,7 +25,6 @@ export default function HashTagPage() {
     fetchTweets();
   }, [hashtag]);
 
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -42,7 +41,7 @@ export default function HashTagPage() {
 
   const getUserName = (author) => {
     const user = users.find((user) => user._id === author);
-    return user ? user.username : '';
+    return user ? `${user.username} ${user.nickname}` : '';
   };
 
   return (
@@ -60,7 +59,7 @@ export default function HashTagPage() {
           .filter((tweet) => tweet.text.includes(`#${hashtag}`))
           .map((tweet) => (
             <div key={tweet._id}>
-              <h2>{getUserName(tweet.author)}</h2>
+              <h2>  <Link to={`/users/profile/${tweet.author}`}> {getUserName(tweet.author)} </Link></h2>
               <p>{tweet.createdAt}</p>
               <p>{tweet.text.split(' ').map((word, index) => (
                 word.startsWith('#') ?

@@ -8,8 +8,7 @@ import User from "./db/user.js";
 import dbConnect from "./db/database.js";
 const app = express();
 dbConnect();
-app.use((req, res, next) =>
-{
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -24,145 +23,113 @@ app.use((req, res, next) =>
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get("/", (request, response, next) =>
-{
+app.get("/", (request, response, next) => {
   response.json({ message: "Hey! This is your server response!" });
   next();
 });
 //All Users
-app.get("/users", async (request, response) =>
-{
-  try
-  {
+app.get("/users", async (request, response) => {
+  try {
     const users = await User.find();
     response.status(200).send(users);
-  } catch (error)
-  {
+  } catch (error) {
     response.status(500).send("Internal server error");
   }
 });
-app.get("/users/profile/:id", async (request, response) =>
-{
-  try
-  {
+app.get("/users/profile/:id", async (request, response) => {
+  try {
     const user = await User.findById(request.params.id);
-    if (user)
-    {
+    if (user) {
       response.status(200).send(user);
-    } else
-    {
+    } else {
       response.status(404).send("User not found");
     }
-  } catch (error)
-  {
+  } catch (error) {
     response.status(500).send("Internal server error");
   }
 });
 
-app.get('/search', async (req, res) =>
-{
+app.get('/search', async (req, res) => {
   const searchQuery = req.query.search;
 
-  try
-  {
+  try {
     const users = await User.find({ username: { $regex: searchQuery, $options: 'i' } });
     /*     console.log("hello") */
     res.json(users);
-  } catch (error)
-  {
+  } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred while fetching users');
   }
 });
-app.get("/homeuser", async (request, response) =>
-{
-  try
-  {
-    const users = await User.aggregate([ { $sample: { size: 4 } } ]);
+app.get("/homeuser", async (request, response) => {
+  try {
+    const users = await User.aggregate([{ $sample: { size: 4 } }]);
     response.status(200).send(users);
-  } catch (error)
-  {
+  } catch (error) {
     /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });
-app.get("/profile/:id", async (request, response) =>
-{
-  try
-  {
+app.get("/profile/:id", async (request, response) => {
+  try {
     const user = await User.findById(request.params.id);
-    if (!user)
-    {
+    if (!user) {
       response.status(404).send("The user was not found.");
-    } else
-    {
+    } else {
       response.status(200).send(user);
     }
-  } catch (error)
-  {
+  } catch (error) {
     /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });
 
-app.put("/profile/:id", async (req, res) =>
-{
+app.put("/profile/:id", async (req, res) => {
   const { id } = req.params;
   const updatedProfile = req.body;
 
-  try
-  {
+  try {
     const updatedProfileData = await User.findByIdAndUpdate(id, updatedProfile, { new: true });
     res.json(updatedProfileData);
-  } catch (err)
-  {
+  } catch (err) {
     /*     console.log(error); */
     res.status(500).json({ error: 'Failed to update profile' });
   }
 });
-app.post("/register", async (request, response) =>
-{
-  try
-  {
+app.post("/register", async (request, response) => {
+  try {
     const hashPassword = await bcrypt.hash(request.body.password, 10);
     const user = new User({
       username: request.body.username,
       email: request.body.email,
       password: hashPassword,
     });
-    try
-    {
+    try {
       const result = await user.save();
       response.status(201).send({
         message: "User registered successfully",
       });
-    } catch (error)
-    {
+    } catch (error) {
       /* console.log("Something went wrong", error); */
       response.status(400).send({
         message: "Could not register user",
       });
     }
-  } catch (error)
-  {
+  } catch (error) {
     response.status(500).send({
       message: "Server Error",
     });
   }
 });
-app.post("/login", async (request, response) =>
-{
-  const user = await User.findOne({ $or: [ { email: request.body.email }, { username: request.body.username } ] });
-  if (user)
-  {
+app.post("/login", async (request, response) => {
+  const user = await User.findOne({ $or: [{ email: request.body.email }, { username: request.body.username }] });
+  if (user) {
     const match = await bcrypt.compare(request.body.password, user.password);
-    if (!match)
-    {
+    if (!match) {
       response.status(404).send({
         message: "Bad Request",
       });
-    } else
-    {
+    } else {
       const token = jwt.sign(
         {
           userId: user._id,
@@ -178,8 +145,7 @@ app.post("/login", async (request, response) =>
         token,
       });
     }
-  } else
-  {
+  } else {
     response.status(404).send({
       message: "Bad Request",
     });
@@ -187,10 +153,8 @@ app.post("/login", async (request, response) =>
 });
 
 // make a post request for follow user
-app.post('/users/:id/followers', async (req, res) =>
-{
-  try
-  {
+app.post('/users/:id/followers', async (req, res) => {
+  try {
     const userId = req.params.id;
     const followerId = req.body.followerId;
     /* console.log(followerId); */
@@ -201,29 +165,23 @@ app.post('/users/:id/followers', async (req, res) =>
     await user.save();
 
     res.sendStatus(200);
-  } catch (error)
-  {
+  } catch (error) {
     /* console.log(error.message); */
     res.sendStatus(500);
   }
 });
-app.get('/tweets', async (req, res) =>
-{
-  try
-  {
+app.get('/tweets', async (req, res) => {
+  try {
     const tweets = await Post.find().lean().exec();
-    if (!tweets)
-    {
+    if (!tweets) {
       /* console.error('Error: No tweets found'); */
       res.status(500).send('Error fetching tweets');
       return;
     }
 
-    const tweetPromises = tweets.map(async (tweet) =>
-    {
+    const tweetPromises = tweets.map(async (tweet) => {
       const user = await User.findById(tweet.author);
-      if (!user)
-      {
+      if (!user) {
         /* console.error(`Error: User not found for tweet with author: ${tweet.author}`); */
         return null;
       }
@@ -238,22 +196,18 @@ app.get('/tweets', async (req, res) =>
     const tweetsWithUserInfo = await Promise.all(tweetPromises);
     const filteredTweetsWithUserInfo = tweetsWithUserInfo.filter(tweet => tweet !== null);
     res.send(filteredTweetsWithUserInfo);
-  } catch (error)
-  {
+  } catch (error) {
     /*  console.error('Error:', error); */
     res.status(500).send('Error fetching tweets');
   }
 });
-app.get('/hashtags/:hashtag', async (req, res) =>
-{
+app.get('/hashtags/:hashtag', async (req, res) => {
   const hashtag = req.params.hashtag;
 
-  try
-  {
+  try {
     const posts = await Post.find({ hashtags: { $regex: hashtag, $options: 'i' } });
     res.json(posts);
-  } catch (error)
-  {
+  } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred while fetching posts');
   }
@@ -292,10 +246,8 @@ app.get("/trending-hashtags", async (req, res) => {
 
 
 // Get tweets for a specific user
-app.get('/tweets/:id', async (req, res) =>
-{
-  try
-  {
+app.get('/tweets/:id', async (req, res) => {
+  try {
     const userId = req.params.id;
     const userTweets = await Post.find({ author: userId });
 
@@ -307,16 +259,13 @@ app.get('/tweets/:id', async (req, res) =>
     }));
 
     res.send(tweetsWithUserInfo);
-  } catch (error)
-  {
+  } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Error fetching user tweets');
   }
 });
-app.post("/tweet", authMiddleware, async (request, response) =>
-{
-  try
-  {
+app.post("/tweet", authMiddleware, async (request, response) => {
+  try {
     const { userId } = request.user;
     const { text } = request.body;
 
@@ -331,60 +280,49 @@ app.post("/tweet", authMiddleware, async (request, response) =>
 
     const savedTweet = await tweet.save();
     response.status(201).send(savedTweet);
-  } catch (error)
-  {
+  } catch (error) {
     console.error(error);
     response.status(500).send("Internal server error");
   }
 });
+
 //SubmittedTweet
-app.get("/users/:id", async (request, response) =>
-{
-  try
-  {
+app.get("/users/:id", async (request, response) => {
+  try {
     const userId = request.params.id;
     const user = await User.findById(userId);
 
-    if (user)
-    {
+    if (user) {
       response.status(200).send(user);
-    } else
-    {
+    } else {
       response.status(404).send("User not found");
     }
-  } catch (error)
-  {
+  } catch (error) {
     /*     console.log(error); */
     response.status(500).send("Internal server error");
   }
 });
 //follow
-app.post("/users/:id/follow", async (req, res) =>
-{
-  try
-  {
+app.post("/users/:id/follow", async (req, res) => {
+  try {
     const userId = req.params.id;
     const currentUserId = req.body.currentUserId;
     const action = req.body.action; // "follow" or "unfollow"
-    const [ currentUser, userToFollow ] = await Promise.all([
+    const [currentUser, userToFollow] = await Promise.all([
       User.findById(currentUserId),
       User.findById(userId),
     ]);
-    console.log("CurentUser", currentUser, userToFollow)
-    console.log("CurrentUserId", currentUserId, userId)
-    if (action === "follow")
-    {
+    /* console.log("CurentUser", currentUser, userToFollow)
+    console.log("CurrentUserId", currentUserId, userId) */
+    if (action === "follow") {
 
-      if (!currentUser.following.some((id) => id.equals(userToFollow._id)))
-      {
+      if (!currentUser.following.some((id) => id.equals(userToFollow._id))) {
         currentUser.following.push(userToFollow._id);
       }
-      if (!userToFollow.followers.some((id) => id.equals(currentUser._id)))
-      {
+      if (!userToFollow.followers.some((id) => id.equals(currentUser._id))) {
         userToFollow.followers.push(currentUser._id);
       }
-    } else if (action === "unfollow")
-    {
+    } else if (action === "unfollow") {
 
       currentUser.following = currentUser.following.filter(
         (id) => !id.equals(userToFollow._id)
@@ -392,20 +330,38 @@ app.post("/users/:id/follow", async (req, res) =>
       userToFollow.followers = userToFollow.followers.filter(
         (id) => !id.equals(currentUser._id)
       );
-    } else
-    {
+    } else {
       res.status(400).json({ message: "Invalid action" });
       return;
     }
-    await Promise.all([ currentUser.save(), userToFollow.save() ]);
+    await Promise.all([currentUser.save(), userToFollow.save()]);
 
-    res.status(200).json({ message: `Successfully ${ action }ed the user` });
-  } catch (error)
-  {
-    console.error(error);
+    res.status(200).json({ message: `Successfully ${action}ed the user` });
+  } catch (error) {
+    /*    console.error(error); */
     res.status(500).json({ message: "An error occurred while updating the follow relationship" });
   }
 });
+
+app.get('/tweets/:userId/following', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId);
+
+    if (user.following.length === 0) {
+      const randomTweets = await Post.aggregate([{ $match: { author: { $ne: userId } } }, { $sample: { size: 10 } }]);
+      res.send(randomTweets);
+    } else {
+      const followingTweets = await Post.find({ author: { $in: user.following } });
+      res.send(followingTweets);
+    }
+  } catch (error) {
+    /*     console.error('Error:', error); */
+    res.status(500).send('Error fetching tweets');
+  }
+});
+
+
 export default app;
 
 
