@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import './TrendingHashtags.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 

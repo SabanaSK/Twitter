@@ -1,6 +1,5 @@
 import React from 'react';
 import './LogoutPopup.css';
-import { Link } from 'react-router-dom';
 
 const LogoutPopup = ({ showPopup, onClose, onChanel }) =>
 {

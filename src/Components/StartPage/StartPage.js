@@ -5,7 +5,6 @@ import classes from './Start.module.css';
 export default function StartPage ()
 {
   const navigate = useNavigate();
-  const location = useLocation();
   const [ loginInfo, setLoginInfo ] = useState({
     emailOrUsername: '',
   });

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import classes from './LogIn.module.css';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 export default function LoginPage() {
   const navigate = useNavigate();

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import './ProfileMenu.css';
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import LogoutPopup from '../LogoutPopup/LogoutPopup';
 
 export const ProfileMenu = ({ loggedUserId }) => {

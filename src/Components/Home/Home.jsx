@@ -3,7 +3,7 @@ import NavMenu from '../NavMenu/NavMenu';
 import TweetsList from '../TweetList/TweetsList';
 import TrendingHashtags from '../TrendingHashtags/TrendingHashtags';
 import './Home.css';
-import { Link, Route, Routes } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import SearchForFriends from './searchForUser';
 import Hashtags from '../Hashtag/HashTag';

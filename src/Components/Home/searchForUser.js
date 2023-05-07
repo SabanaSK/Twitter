@@ -7,11 +7,20 @@ const SearchForFriends = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [allUsers, setAllUsers] = useState([]);
   const [searchStarted, setSearchStarted] = useState(false);
+  const [allHashtags, setAllHashtags] = useState([]);
 
-  const fetchAllUsers = async (searchQuery) => {
+
+  const fetchAllUsersAndHashtags = async (searchQuery) => {
     try {
-      const response = await axios.get(`http://localhost:3001/search?search=${searchQuery}`);
-      setAllUsers(response.data);
+      const encodedSearchQuery = encodeURIComponent(searchQuery);
+      const response = await axios.get(`http://localhost:3001/search?search=${encodedSearchQuery}`);
+      setAllUsers(response.data.users);
+
+      if (searchQuery.startsWith('#')) {
+        setAllHashtags(response.data.hashtags);
+      } else {
+        setAllHashtags([]);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -19,12 +28,16 @@ const SearchForFriends = () => {
 
   useEffect(() => {
     if (searchStarted) {
-      fetchAllUsers(searchQuery);
+      fetchAllUsersAndHashtags(searchQuery);
     }
   }, [searchQuery, searchStarted]);
 
   const filteredUsers = allUsers.filter((user) =>
     user.username.toLowerCase().startsWith(searchQuery.toLowerCase())
+  );
+
+  const filteredHashtags = allHashtags.filter((hashtag) =>
+      hashtag._id.toLowerCase().startsWith(searchQuery.toLowerCase())
   );
 
   const handleInputChange = (event) => {
@@ -52,6 +65,17 @@ const SearchForFriends = () => {
           ))}
         </ul>
       )}
+
+      {searchQuery.startsWith('#') && searchQuery.length > 1 && (
+          <ul>
+            {filteredHashtags.map((hashtag) => (
+                <li key={hashtag.name}>
+                  <Link to={`/hashtags/${hashtag._id.slice(1)}`}>{hashtag._id}</Link>
+                </li>
+            ))}
+          </ul>
+      )}
+
     </div>
   );
 };

@@ -74,13 +74,24 @@ app.get('/search', async (req, res) => {
 
   try {
     const users = await User.find({ username: { $regex: searchQuery, $options: 'i' } });
-    /*     console.log("hello") */
-    res.json(users);
+
+    let hashtags = [];
+    if (searchQuery.startsWith('#')) {
+      hashtags = await Post.aggregate([
+        { $unwind: "$hashtags" },
+        { $match: { hashtags: { $regex: searchQuery.slice(1), $options: 'i' } } },
+        { $group: { _id: "$hashtags", count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+      ]);
+    }
+
+    res.json({ users, hashtags });
   } catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred while fetching users');
+    res.status(500).send('An error occurred while fetching users and hashtags');
   }
 });
+
 app.get("/homeuser", async (request, response) => {
   try {
     const users = await User.aggregate([{ $sample: { size: 4 } }]);

@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { useParams } from "react-router-dom";
-import { FaUser, FaMapMarkerAlt, FaUsers } from "react-icons/fa";
-import classes from './OtherUsersProfile.module.css';
-import { Link } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const OtherUserProfilePage = () => {
   const { id } = useParams();
@@ -61,6 +58,7 @@ const OtherUserProfilePage = () => {
       });
       if (response.status === 200) {
         setIsFollowing(!isFollowing);
+        window.location.reload();
       }
 
     } catch (error) {
