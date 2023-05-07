@@ -6,6 +6,7 @@ import TrendingHashtags from '../TrendingHashtags/TrendingHashtags';
 import Hashtag from '../Hashtag/HashTag';
 import { Route, Routes } from 'react-router-dom';
 import Profile from '../Profile/Profile';
+import { Link } from 'react-router-dom';
 
 export default function HashTagPage ()
 {
@@ -48,11 +49,11 @@ export default function HashTagPage ()
     fetchUsers();
   }, []);
 
-  // const getUserName = (userId) =>
-  // {
-  //   const user = users.find((user) => user._id === userId);
-  //   return user ? user.username : '';
-  // };
+  const getUserName = (author) =>
+  {
+    const user = users.find((user) => user._id === author);
+    return user ? user.username : '';
+  };
 
   return (
     <div className="home">
@@ -69,10 +70,11 @@ export default function HashTagPage ()
           .filter((tweet) => tweet.text.includes(`#${ hashtag }`))
           .map((tweet) => (
             <div key={tweet._id}>
-              <h2>{tweet.username}</h2>
-              <h3>@{tweet.nickname}</h3>
+              <h2>{getUserName(tweet.author)}</h2>
               <p>{tweet.createdAt}</p>
-              <p>{tweet.text}</p>
+              <p>
+                <Link to={`/tweet/${ tweet._id }`}>#{hashtag}</Link>
+              </p>
 
             </div>
           ))}
