@@ -59,18 +59,11 @@ h1 {
   margin-left: 20px;
 }
 
-
-
 input:focus {
   outline: none;
   border-color: rgb(20, 20, 21);
   background: #f6dbfc;
 }
-
-
-
-
-
 
 .form {
   display: flex;
