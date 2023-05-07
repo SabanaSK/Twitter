@@ -9,7 +9,6 @@ export default function PostTweet (props)
     const [ isButtonDisabled, setIsButtonDisabled ] = useState(true);
     const [ message, setMessage ] = useState(null);
     const [ hashtags, setHashtags ] = useState([]);
-
     const handleInputChange = (e) =>
     {
         e.preventDefault();
@@ -21,9 +20,9 @@ export default function PostTweet (props)
         setHashtags(text.match(/#\w+/g));
     }
 
-    const handleSubmit = async () =>
+    const handleSubmit = async (e) =>
     {
-
+        e.preventDefault();
 
 
         try
@@ -69,3 +68,4 @@ export default function PostTweet (props)
         </div>
     );
 }
+

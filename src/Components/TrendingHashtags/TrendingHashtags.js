@@ -1,39 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './TrendingHashtags.css';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 const TrendingHashtags = () => {
-    const trends = [
-        {
-            name: '#iPhone',
-            subtitle: 'Tech · Trending',
-            tweets: '347k',
-        },
-        {
-            name: '#JensenYH',
-            tweets: '275k',
-        },
-        {
-            name: '#GBG',
-            tweets: '275k',
-        }
-    ];
+  const [trends, setTrends] = useState([]);
 
-    return (
-        <div className="trending-hashtags">
-            <div className="trending-container">
-                <h2 className="trending-title">Trending for you</h2>
-                {trends.map((trend, index) => (
-                    <div key={index} className="trending-item">
-                        {trend.tweets && (
-                            <div className="trending-item-stats">{trend.tweets} Tweets</div>
-                        )}
-                        <div className="trending-item-header">{trend.name}</div>
+  useEffect(() => {
+    const fetchTrendingHashtags = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/trending-hashtags');
+        /*   console.log(response); */
+        setTrends(response.data);
+        /* console.log(response.data); */
+      } catch (error) {
+        //console.error('Error fetching trending hashtags:', error);
+      }
+    };
 
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-};
+    fetchTrendingHashtags();
+  }, []);
 
-export default TrendingHashtags;
+  return (
+    <div className="trending-hashtags">
+      <div className="trending-container">
+        {trends.length > 0 && trends.map((trend, index) => (
+          <div key={index} className="trending-item">
+            <a href={`/hashtags/${trend.name.slice(1)}`} >
+              {trend.tweets && (
+                <div className="trending-item-stats">{trend.tweets} Tweets</div>
+              )}
+              <div className="trending-item-header">{trend.name}</div>
+            </a>
+          </div>
+        ))}
+        {trends.length === 0 && <p>No trending hashtags found.</p>}
+      </div>
+    </div>
+  );
+
+}
+export default TrendingHashtags 

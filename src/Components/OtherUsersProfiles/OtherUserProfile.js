@@ -92,7 +92,7 @@ const OtherUserProfilePage = () => {
         </button>
 
         <h2 className="profile-name">{profileData.username}</h2>
-        <h3 className="profile-username">@{profileData.nickname}</h3>
+        <h3 className="profile-username">{profileData.nickname}</h3>
         <p >{profileData.about}</p>
         <ul>
           <li>{profileData.employment}</li>

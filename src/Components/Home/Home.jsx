@@ -8,8 +8,7 @@ import Profile from '../Profile/Profile';
 import SearchForFriends from './searchForUser';
 import Hashtags from '../Hashtag/HashTag';
 
-const Home = () =>
-{
+const Home = () => {
   return (
     <div className="home">
       <div className="home-left-section">

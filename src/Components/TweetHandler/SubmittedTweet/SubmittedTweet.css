@@ -1,18 +1,20 @@
 .submitted-tweet {
-  align-items: flex-start;
-  padding: 12px;
+  display: flex;
+  padding-left: 3em;
+  padding-top: 1em; 
+  padding-bottom: 12px;
   border-bottom: 1px solid #e1e8ed;
   background-color: #fff;
-}
-
-.submitted-tweet strong {
+  }
+  
+  .submitted-tweet strong {
   font-size: 14px;
   font-weight: bold;
   margin-right: 6px;
-}
-
-.submitted-tweet > span {
+  }
+  
+  .submitted-tweet > span {
   font-size: 14px;
   color: #657786;
   margin-right: 6px;
-}
+  }
