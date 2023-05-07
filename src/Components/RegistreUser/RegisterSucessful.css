@@ -1,25 +1,3 @@
-/* .welcomecard {
-  width: 90%;
-  max-width: 40rem;
-  padding: 3rem;
-  margin: 2rem auto;
-  text-align: center;
-}
-
-button {
-  margin: 0 0.5rem;
-  padding: 0.5rem 1.5rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #010b13;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 290px;
-} */
-
 .welcomecard {
   width: 90%;
   max-width: 40rem;

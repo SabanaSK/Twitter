@@ -10,10 +10,6 @@ export default function PostTweet (props)
     const [ message, setMessage ] = useState(null);
     const [ hashtags, setHashtags ] = useState([]);
 
-
-
-
-
     const handleInputChange = (e) =>
     {
         e.preventDefault();
