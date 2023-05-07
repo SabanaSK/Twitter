@@ -371,6 +371,36 @@ app.get('/tweets/:userId/following', async (req, res) => {
   }
 });
 
+app.get("/users/:id/followers", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      const followers = await User.find({ _id: { $in: user.followers } });
+      res.status(200).json(followers);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    /*    console.error(error); */
+    res.status(500).json({ message: "An error occurred while fetching the followers" });
+  }
+});
+
+app.get("/users/:id/following", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      const following = await User.find({ _id: { $in: user.following } });
+      res.status(200).json(following);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    /*  console.error(error); */
+    res.status(500).json({ message: "An error occurred while fetching the following" });
+  }
+});
+
 
 export default app;
 
