@@ -12,8 +12,8 @@ const PostSchema = mongoose.Schema(
       required: true,
     },
     hashtags: {
-      type: [ String ]
-
+      type: [ String ],
+      required: false,
     },
     createdAt: {
       type: Date,

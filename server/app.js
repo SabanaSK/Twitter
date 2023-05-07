@@ -258,6 +258,39 @@ app.get('/hashtags/:hashtag', async (req, res) =>
     res.status(500).send('An error occurred while fetching posts');
   }
 });
+
+async function getTrendingHashtags() {
+  try {
+    const hashtags = await Post.aggregate([
+      { $unwind: "$hashtags" },
+      { $group: { _id: "$hashtags", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 3 }, 
+    ]);
+
+    return hashtags.map((hashtag) => ({
+      name: hashtag._id,
+      tweets: `${hashtag.count}k`,
+    }));
+  } catch (error) {
+    throw new Error("Failed to fetch trending hashtags");
+  }
+}
+
+
+app.get("/trending-hashtags", async (req, res) => {
+  try {
+    const trendingHashtags = await getTrendingHashtags();
+    res.status(200).send(trendingHashtags);
+  } catch (error) {
+    //console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+
+
+
 // Get tweets for a specific user
 app.get('/tweets/:id', async (req, res) =>
 {
