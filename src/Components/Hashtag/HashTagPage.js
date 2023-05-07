@@ -8,40 +8,31 @@ import { Route, Routes } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import { Link } from 'react-router-dom';
 
-export default function HashTagPage ()
-{
+export default function HashTagPage() {
   const { hashtag } = useParams();
-  const [ tweets, setTweets ] = useState([]);
+  const [tweets, setTweets] = useState([]);
 
-  useEffect(() =>
-  {
-    const fetchTweets = async () =>
-    {
-      try
-      {
-        const response = await axios.get(`http://localhost:3001/hashtags/${ hashtag }`);
+  useEffect(() => {
+    const fetchTweets = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/hashtags/${hashtag}`);
         setTweets(response.data);
-      } catch (error)
-      {
+      } catch (error) {
         console.error(error);
       }
     };
 
     fetchTweets();
-  }, [ hashtag ]);
+  }, [hashtag]);
 
-  const [ users, setUsers ] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  useEffect(() =>
-  {
-    const fetchUsers = async () =>
-    {
-      try
-      {
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
         const response = await axios.get(`http://localhost:3001/users`);
         setUsers(response.data);
-      } catch (error)
-      {
+      } catch (error) {
         console.error(error);
       }
     };
@@ -49,8 +40,7 @@ export default function HashTagPage ()
     fetchUsers();
   }, []);
 
-  const getUserName = (author) =>
-  {
+  const getUserName = (author) => {
     const user = users.find((user) => user._id === author);
     return user ? user.username : '';
   };
@@ -67,13 +57,15 @@ export default function HashTagPage ()
         </Routes>
         <h1>#{hashtag}</h1>
         {tweets
-          .filter((tweet) => tweet.text.includes(`#${ hashtag }`))
+          .filter((tweet) => tweet.text.includes(`#${hashtag}`))
           .map((tweet) => (
             <div key={tweet._id}>
               <h2>{getUserName(tweet.author)}</h2>
               <p>{tweet.createdAt}</p>
-              <p>
-                <Link to={`/tweet/${ tweet._id }`}>#{hashtag}</Link>
+              <p>{tweet.text.split(' ').map((word, index) => (
+                word.startsWith('#') ?
+                  <a href={`/hashtags/${word.slice(1)}`} key={index}>{word} </a> : word + ' '
+              ))}
               </p>
 
             </div>
