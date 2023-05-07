@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+#Twitter Clone
+Twitter Clone is a school project created by a group of four members: Nandini, Natalie, me, and Hiams. This project is an attempt to recreate some of the basic functionalities of Twitter, a popular social media platform.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Getting Started
+To get started with this app, follow the steps below:
 
-## Available Scripts
+Clone the repository to your local machine using the following command:
 
-In the project directory, you can run:
+git clone <repository-url>
+Install the dependencies for the client and server:
 
-### `npm start`
+npm install
+cd server
+npm install
+Start the client and server:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm start (on twitter)
+npm start (on server)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You should now be able to access the app at http://localhost:3000.
 
-### `npm test`
+###Functionality
+The Twitter Clone app includes the following functionalities:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Register
+Users can create a new account on the platform by registering with a valid email address and password.
 
-### `npm run build`
+2. Login/Logout
+Registered users can log in to their accounts using their email address and password. Users can also log out of their accounts when they are done using the platform.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Post Tweet with Hashtags
+Registered users can post tweets with hashtags. These hashtags can be used to categorize tweets and make them easier to find.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Search for User or Hashtag
+Users can search for other users or hashtags on the platform. This makes it easy to find tweets from specific users or on specific topics.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Follow User
+Users can follow other users on the platform to stay updated on their tweets.
 
-### `npm run eject`
+6. Edit Profile
+Users can edit their profile information, such as their name and profile picture.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+7. Trendboard
+The app includes a trendboard that displays the most popular hashtags on the platform. Users can click on these hashtags to view tweets on specific topics.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Conclusion
+Twitter Clone is a simple project that demonstrates some of the basic functionalities of Twitter. The app was built as a group project and serves as a great learning experience for beginners interested in web development.
